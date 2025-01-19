@@ -1,0 +1,102 @@
+/* General Reset */
+body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Nunito', sans-serif; /* Body font */
+    height: 100%;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* Background */
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../assets/images/altadena_bg1.jpg') center/cover no-repeat;
+    z-index: -1;
+}
+
+/* Central Box */
+.central-box {
+    position: relative;
+    width: 90%;
+    max-width: 800px;
+    margin: 7% auto; /* Reduced vertical margin */
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+/* Header */
+.main-header h1 {
+    font-family: 'Alegreya', serif;
+    font-weight: 600; /* Set to 600 */
+    font-size: 3.5rem;
+	color: #283618;
+    margin-top: 0; /* Removed extra space above the header */
+    margin-bottom: 10px; /* Reduced space between header and subheader */\
+}
+
+.main-header h2 {
+    font-family: 'Alegreya', serif;
+    font-weight: 400; /* Set to 400 */
+    font-size: 2rem;
+    color: #606c38;
+    margin-bottom: 15px; /* Fine-tuned spacing below subheader */
+}
+
+/* Info Section */
+.info {
+    margin-bottom: 25px; /* Added spacing between info and divider */
+    font-size: 1rem;
+}
+
+.info strong.phone-number {
+    font-weight: bold;
+    color: #1d58ba; /* Matches hyperlink color */
+}
+
+.info a {
+    color: #1d58ba;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.info a:hover {
+    text-decoration: underline;
+}
+
+/* Divider */
+.divider {
+    margin: 20px 0; /* Adds space between Call line and About section */
+    font-size: 1.5rem;
+    color: #555;
+    text-align: center;
+}
+
+/* About Section */
+.about p {
+    font-size: 1rem;
+    margin-bottom: 15px;
+    text-align: left;
+	margin-right: 5%;
+	margin-left: 5%;
+}
+
+.about a {
+    color: #1d58ba;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.about a:hover {
+    text-decoration: underline;
+}
