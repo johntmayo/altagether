@@ -27,7 +27,7 @@ body, html {
     position: relative;
     width: 90%;
     max-width: 800px;
-    margin: 7% auto; /* Reduced vertical margin */
+    margin: 7% auto;
     padding: 20px;
     background: rgba(255, 255, 255, 0.9);
     border-radius: 12px;
@@ -38,30 +38,34 @@ body, html {
 /* Header */
 .main-header h1 {
     font-family: 'Alegreya', serif;
-    font-weight: 600; /* Set to 600 */
+    font-weight: 600;
     font-size: 3.5rem;
-	color: #283618;
-    margin-top: 0; /* Removed extra space above the header */
-    margin-bottom: 10px; /* Reduced space between header and subheader */\
+    color: #283618;
+    margin-top: 0;
+    margin-bottom: 5px;
+    line-height: 1.1;
 }
 
 .main-header h2 {
     font-family: 'Alegreya', serif;
-    font-weight: 400; /* Set to 400 */
-    font-size: 2rem;
+    font-weight: 400;
+    font-size: 1.5rem;
+    font-style: italic;
     color: #606c38;
-    margin-bottom: 15px; /* Fine-tuned spacing below subheader */
+    margin-top: 0;
+    margin-bottom: 10px;
+    line-height: 1.1;
 }
 
 /* Info Section */
 .info {
-    margin-bottom: 25px; /* Added spacing between info and divider */
+    margin-bottom: 25px;
     font-size: 1rem;
 }
 
 .info strong.phone-number {
     font-weight: bold;
-    color: #1d58ba; /* Matches hyperlink color */
+    color: #1d58ba;
 }
 
 .info a {
@@ -76,10 +80,16 @@ body, html {
 
 /* Divider */
 .divider {
-    margin: 20px 0; /* Adds space between Call line and About section */
-    font-size: 1.5rem;
-    color: #555;
+    margin: 20px 0;
     text-align: center;
+}
+
+.icon {
+    display: inline-block;
+    width: 15px; /* Increased from 12px by 25% */
+    height: 15px;
+    margin: 0 5px;
+    vertical-align: middle;
 }
 
 /* About Section */
@@ -87,8 +97,8 @@ body, html {
     font-size: 1rem;
     margin-bottom: 15px;
     text-align: left;
-	margin-right: 5%;
-	margin-left: 5%;
+    margin-right: 5%;
+    margin-left: 5%;
 }
 
 .about a {
@@ -100,3 +110,24 @@ body, html {
 .about a:hover {
     text-decoration: underline;
 }
+
+.callout p {
+    font-size: 1rem;
+    margin-bottom: 15px;
+    text-align: left;
+    margin-right: 5%;
+    margin-left: 5%;
+	font-style: italic;
+	text-align: center;
+}
+
+.callout a {
+    color: #1d58ba;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.callout a:hover {
+    text-decoration: underline;
+}
+
