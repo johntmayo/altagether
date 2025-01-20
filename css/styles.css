@@ -27,7 +27,7 @@ body, html {
     position: relative;
     width: 90%;
     max-width: 800px;
-    margin: 7% auto;
+    margin: 2% auto;
     padding: 20px;
     background: rgba(255, 255, 255, 0.9);
     border-radius: 12px;
@@ -86,8 +86,8 @@ body, html {
 
 .icon {
     display: inline-block;
-    width: 15px; /* Increased from 12px by 25% */
-    height: 15px;
+    width: 20px; /* Increased from 12px by 25% */
+    height: 20px;
     margin: 0 5px;
     vertical-align: middle;
 }
@@ -99,6 +99,10 @@ body, html {
     text-align: left;
     margin-right: 5%;
     margin-left: 5%;
+}
+
+.about strong {
+	    color: #e76f51;
 }
 
 .about a {
@@ -130,4 +134,5 @@ body, html {
 .callout a:hover {
     text-decoration: underline;
 }
+
 
