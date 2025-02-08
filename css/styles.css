@@ -135,4 +135,18 @@ body, html {
     text-decoration: underline;
 }
 
+/* Map Section */
+#map { 
+    width: 800px;  /* or your desired width */
+    height: 600px; /* or your desired height */
+    position: relative;
+}
 
+.mapboxgl-popup {
+            max-width: 400px;
+            font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+}
+
+.mapboxgl-canvas {
+    width: 800px !important;
+}

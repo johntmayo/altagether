@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<!-- saved from url=(0023)https://altagether.org/ -->
+<html lang="en"><div id="in-page-channel-node-id" data-channel-name="in_page_channel_5EaXWN"></div><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keep Altadena Together</title>
+    <link rel="stylesheet" href="css/styles.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;600;700&family=Nunito:wght@400&display=swap" rel="stylesheet">
+	<link rel="icon" href="assets/images/altagether.png" type="image/png">
+<style>:is([id*='google_ads_iframe'],[id*='taboola-'],.taboolaHeight,.taboola-placeholder,#top-ad,#credential_picker_container,#credentials-picker-container,#credential_picker_iframe,[id*='google-one-tap-iframe'],#google-one-tap-popup-container,.google-one-tap__module,.google-one-tap-modal-div,#amp_floatingAdDiv,#ez-content-blocker-container) {display:none!important;min-height:0!important;height:0!important;}</style>
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js"></script>
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css">
+<style>
+
+@keyframes slide-in-one-tap {
+  from {
+    transform: translateY(80px);
+  }
+  to {
+    transform: translateY(0px);
+  }
+}
+
+.trust-hide-gracefully {
+  opacity: 0;
+}
+
+.trust-wallet-one-tap .hidden {
+    display: none;
+  }
+
+.trust-wallet-one-tap .semibold {
+    font-weight: 500;
+  }
+
+.trust-wallet-one-tap .binance-plex {
+    font-family: 'Binance';
+  }
+
+.trust-wallet-one-tap .rounded-full {
+    border-radius: 50%;
+  }
+
+.trust-wallet-one-tap .flex {
+    display: flex;
+  }
+
+.trust-wallet-one-tap .flex-col {
+    flex-direction: column;
+  }
+
+.trust-wallet-one-tap .items-center {
+    align-items: center;
+  }
+
+.trust-wallet-one-tap .space-between {
+    justify-content: space-between;
+  }
+
+.trust-wallet-one-tap .justify-center {
+    justify-content: center;
+  }
+
+.trust-wallet-one-tap .w-full {
+    width: 100%;
+  }
+
+.trust-wallet-one-tap .box {
+    transition: all 0.5s cubic-bezier(0, 0, 0, 1.43);
+    animation: slide-in-one-tap 0.5s cubic-bezier(0, 0, 0, 1.43);
+    width: 384px;
+    border-radius: 15px;
+    background: #FFF;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    z-index: 1020;
+  }
+
+.trust-wallet-one-tap .header {
+    gap: 15px;
+    border-bottom: 1px solid #E6E6E6;
+    padding: 10px 18px;
+  }
+
+.trust-wallet-one-tap .header .left-items {
+      gap: 15px
+    }
+
+.trust-wallet-one-tap .header .title {
+      color: #1E2329;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 28px;
+    }
+
+.trust-wallet-one-tap .header .subtitle {
+      color: #474D57;
+      font-size: 14px;
+      line-height: 20px;
+    }
+
+.trust-wallet-one-tap .header .close {
+      color: #1E2329;
+      cursor: pointer;
+    }
+
+.trust-wallet-one-tap .body {
+    padding: 9px 18px;
+    gap: 10px;
+
+  }
+
+.trust-wallet-one-tap .body .right-items {
+      gap: 10px;
+      width: 100%;
+    }
+
+.trust-wallet-one-tap .body .right-items .wallet-title {
+        color: #1E2329;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 20px;
+      }
+
+.trust-wallet-one-tap .body .right-items .wallet-subtitle {
+        color: #474D57;
+        font-size: 14px;
+        line-height: 20px;
+      }
+
+.trust-wallet-one-tap .connect-indicator {
+    gap: 15px;
+    padding: 8px 0;
+  }
+
+.trust-wallet-one-tap .connect-indicator .flow-icon {
+      color: #474D57;
+    }
+
+.trust-wallet-one-tap .loading-color {
+    color: #FFF;
+  }
+
+.trust-wallet-one-tap .button {
+    border-radius: 50px;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    background-color: rgb(5, 0, 255);
+    border-color: rgb(229, 231, 235);
+    cursor: pointer;
+    text-align: center;
+    height: 45px;
+  }
+
+.trust-wallet-one-tap .button .button-text {
+      color: #FFF;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 20px;
+    }
+
+.trust-wallet-one-tap .footer {
+    margin: 20px 30px;
+  }
+
+.trust-wallet-one-tap .check-icon {
+    color: #FFF;
+  }
+
+@font-face {
+  font-family: 'Binance';
+  src: url(chrome-extension://egjidjbpglichdcondbcbdnbeeppgdph/fonts/BinancePlex-Regular.otf) format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Binance';
+  src: url(chrome-extension://egjidjbpglichdcondbcbdnbeeppgdph/fonts/BinancePlex-Medium.otf) format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Binance';
+  src: url(chrome-extension://egjidjbpglichdcondbcbdnbeeppgdph/fonts/BinancePlex-SemiBold.otf) format('opentype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+</style></head>
+<body>
+
+    <div class="background"></div>
+
+<!--
+    <div class="central-box">
+      <div class="about">
+<p><strong>Town Hall with After The Fire USA:</strong> <a href="https://www.youtube.com/watch?v=jfwSz6SFSf0&ab_channel=StefanieLynch" target=blank>Watch the recording here.</a></p><p>Following the Eaton Fire, wildfire survivors from After the Fire USA sit down with Altadena residents to talk about the road ahead and answer questions.</p>
+      </div>
+    </div>
+
+
+    <div class="central-box">
+        <header class="main-header">
+            <h1>ALTAGETHER</h1>
+            <h2>Keep Altadena together.</h2>
+        </header>
+        <div class="info">
+                      <div class="divider">
+                <img src="./Keep Altadena Together_files/mountain.svg" alt="Mountain Icon" class="icon">
+                      </div>
+
+            <p>Are you an Altadena resident and you have a question or need support?
+            <br>Call <strong class="phone-number">(626) 889-DENA</strong> or email <a href="mailto:info@altagether.org">info@altagether.org</a> and a neighbor will help you out.</p>
+            <div class="divider">
+                <img src="./Keep Altadena Together_files/tree.svg" alt="Tree Icon" class="icon">
+            </div>
+        </div>
+        <div class="about">
+            <p>Following the destruction of the Eaton fire, our goal is to keep residents in Altadena by connecting them with resources and with each other. We are organizing systems for collective recovery and empowering our neighbors to support each other directly throughout the entirety of this disaster.</p>
+            <p>You can help us do this by serving as a zone captain. Zone captains serve as liaisons for their micro-neighborhood and are responsible for connecting with about 40 of their neighbors and ensuring they are supported during this process. <a href="https://docs.google.com/forms/d/e/1FAIpQLSdJ71LUD9B5z-SJQS_gGmbDWWSR1muPfGIDHU8qKGs6mTJzjQ/viewform?usp=sharing" target="_blank">Sign up to be a Zone Captain</a> for your neighbors.</p>
+		</div>
+  
+		<div class="divider">
+          <img src="./Keep Altadena Together_files/mountain.svg" alt="Mountain Icon" class="icon">
+        </div>
+		
+		<div class="callout">
+			<p>Due to the fires, CA Governor Newsom issued an <a href="https://www.gov.ca.gov/2025/01/14/governor-newsom-issues-order-to-protect-fire-victims-from-predatory-real-estate-speculators/">Executive Order</a> prohibiting predatory, unsolicited offers to buy property in 91001, 91104, 91106, 91107 for any amount less than fair market value of the property on January 6, 2025.</p>
+            <p>This law is in effect until April 7, 2025.</p>	  
+            <p>Report violations to the CA Attorney General’s office <a href="http://oag.ca.gov/report">here.</a></p>
+    </div>
+    </div>
+-->
+    <div class="central-box mapbox">
+      <div id="map"></div>
+  
+      <script>
+        // Initialize Mapbox map
+        mapboxgl.accessToken = 'pk.eyJ1IjoiYWx0YWdldGhlciIsImEiOiJjbTY0ZWdqMDkweHZ4MnBwdTg3OGVrbmhyIn0.FyctMHs1MC4EUbDY56-AoA';
+        const map = new mapboxgl.Map({
+          container: 'map',
+          style: 'mapbox://styles/mapbox/streets-v11',
+          center: [-118.137610, 34.189420], // Adjust to your map's center
+          zoom: 12.5
+        });
+        
+        map.on('load', () => {
+          // Add the vector source
+          map.addSource('polygons', {
+            type: 'vector',
+            url: 'mapbox://altagether.cm64fisju135z1qqmifs0zty5-4swrp'
+          });
+        
+          // Add polygon fill layer (without an outline so we can use a separate outline layer)
+          map.addLayer({
+            id: 'polygon-layer',
+            type: 'fill',
+            source: 'polygons',
+            'source-layer': 'zones',
+            paint: {
+              'fill-color': '#088',
+              'fill-opacity': 0.4
+              // Note: removed 'fill-outline-color' so that the separate outline layer is used.
+            }
+          });
+        
+          // Add outline layer to display a border for every polygon
+          map.addLayer({
+            id: 'polygon-outline',
+            type: 'line',
+            source: 'polygons',
+            'source-layer': 'zones', // corrected to the proper source layer
+            paint: {
+              'line-color': '#1788BA',
+              'line-width': 2,
+              'line-opacity': 0.8
+            }
+          });
+        
+          // Create a source for the hovered feature (initially empty)
+          map.addSource('hover-feature', {
+            type: 'geojson',
+            data: {
+              type: 'FeatureCollection',
+              features: []
+            }
+          });
+        
+          // Add a layer for the hovered feature with a different fill color (and border)
+          map.addLayer({
+            id: 'hover-layer',
+            type: 'fill',
+            source: 'hover-feature',
+            paint: {
+              'fill-color': '#f00',       // Change fill color on hover
+              'fill-opacity': 0.6,
+              'fill-outline-color': '#000' // Ensures the hovered polygon still has a border
+            }
+          });
+        });
+        
+        // Change mouse cursor when hovering over a polygon
+        map.on('mouseenter', 'polygon-layer', () => {
+          map.getCanvas().style.cursor = 'pointer';
+        });
+        map.on('mouseleave', 'polygon-layer', () => {
+          map.getCanvas().style.cursor = '';
+        });
+        
+        // Update the hover source as the user moves over a polygon
+        map.on('mousemove', 'polygon-layer', (e) => {
+          if (e.features.length > 0) {
+            const feature = e.features[0];
+            map.getSource('hover-feature').setData(feature.toGeoJSON());
+          }
+        });
+        
+        // Clear the hover source when the mouse leaves the polygon layer
+        map.on('mouseleave', 'polygon-layer', () => {
+          map.getSource('hover-feature').setData({
+            type: 'FeatureCollection',
+            features: []
+          });
+        });
+        
+        // Create and add the geocoder (search bar)
+        const geocoder = new MapboxGeocoder({
+          accessToken: mapboxgl.accessToken,
+          mapboxgl: mapboxgl,
+          marker: true,
+          placeholder: 'Search for your address'
+        });
+        map.addControl(geocoder);
+        
+        // Listen for geocoder search result selection
+        geocoder.on('result', async (e) => {
+          const searchResult = e.result;
+          const point = searchResult.geometry;
+        
+          // Query features at the searched point
+          const features = map.queryRenderedFeatures(
+            map.project([point.coordinates[0], point.coordinates[1]]),
+            { layers: ['polygon-layer'] }
+          );
+        
+          if (features.length > 0) {
+            // Found a polygon at this point
+            const properties = features[0].properties;
+            
+            new mapboxgl.Popup()
+              .setLngLat(point.coordinates)
+              .setHTML(`
+                <h3>${properties.ZoneName || 'N/A'}</h3>
+                <p>Captain: ${properties.ContactName || 'N/A'}</p>
+                <p>Phone: ${properties.ContactPhone || 'N/A'}</p>
+                <p>Email: ${properties.ContactEmail || 'N/A'}</p>
+              `)
+              .addTo(map);
+          } else {
+            // No polygon found at this point
+            new mapboxgl.Popup()
+              .setLngLat(point.coordinates)
+              .setHTML('<p>No zone information available for this location</p>')
+              .addTo(map);
+          }
+        });
+        
+        // Optional: Show properties on polygon click
+        map.on('click', 'polygon-layer', (e) => {
+          const properties = e.features[0].properties;
+          
+          new mapboxgl.Popup()
+            .setLngLat(e.lngLat)
+            .setHTML(`
+              <h3>${properties.ZoneName || 'N/A'}</h3>
+              <p>Captain: ${properties.ContactName || 'N/A'}</p>
+              <p>Phone: ${properties.ContactPhone || 'N/A'}</p>
+              <p>Email: ${properties.ContactEmail || 'N/A'}</p>
+            `)
+            .addTo(map);
+        });
+        </script>
+  </div>
+
+    <script src="./Keep Altadena Together_files/main.js"></script>
+
+
+</body></html>
+
+
+
