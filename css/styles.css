@@ -49,7 +49,7 @@ h1 {
 h2 {
     font-family: 'Alegreya', serif;
     font-weight: 400;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-style: italic;
     color: #606c38;
     margin-top: 0;
@@ -60,7 +60,7 @@ h2 {
 /* Fix H3 Styling */
 .about h3 {
     font-family: 'Alegreya', serif;
-    font-weight: 600;
+    font-weight: 700;
     font-size: 1.5rem;
     color: #283618;
     text-align: left;
@@ -73,7 +73,7 @@ h2 {
 
 .about h4 {
     font-family: 'Alegreya', serif;
-    font-weight: 600;
+    font-weight: 700;
 	font-style: none;
     font-size: 1.2rem;
     color: #283618;
@@ -85,31 +85,25 @@ h2 {
     line-height: 1.2;
 }
 
+
+.about h4 + p,
+.about h4 + ul {
+    margin-top: 2px; /* Reduce space above the next paragraph or list */
+}
+
 .about ul {
 	text-align: left;
 	margin-left: 5%;
 }
 
-/* Info Section */
-.info {
-    margin-bottom: 25px;
-    font-size: 1rem;
-}
 
-.info strong.phone-number {
-    font-weight: bold;
-    color: #1d58ba;
-}
 
-.info a {
-    color: #1d58ba;
-    font-weight: bold;
-    text-decoration: none;
-}
 
-.info a:hover {
-    text-decoration: underline;
-}
+
+
+
+
+
 
 /* Divider */
 .divider {
@@ -125,6 +119,33 @@ h2 {
     vertical-align: middle;
 }
 
+/*Site nav */
+.site-nav {
+    text-align: center;
+    margin: 15px 0;
+    font-size: 1rem;
+	margin-bottom: 25px;
+}
+
+.site-nav a {
+    text-decoration: none;
+    color: #BC6C25;
+    font-weight: bold;
+    padding: 0 10px;
+}
+
+.site-nav a:hover {
+    text-decoration: underline;
+	color: #DDA15E;
+}
+
+.site-nav .disabled {
+    color: #aaa;
+    pointer-events: none;
+}
+
+
+
 /* About Section */
 .about p {
     font-size: 1rem;
@@ -139,14 +160,39 @@ h2 {
 }
 
 .about a {
-    color: #1d58ba;
+    color: #BC6C25;
     font-weight: bold;
     text-decoration: none;
 }
 
 .about a:hover {
     text-decoration: underline;
+	color: #DDA15E;
+
 }
+
+.contact-info {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.contact-info a {
+    color: #BC6C25;
+    font-weight: none;
+    text-decoration: none;
+}
+
+.contact-info a:hover {
+    text-decoration: underline;
+    color: #DDA15E;
+}
+
+.contact-info p {
+    margin: 0;
+    line-height: 1.4; /* Adjust as needed */
+}
+
+
 
 /* Map Section */
 #map { 
