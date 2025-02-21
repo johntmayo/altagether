@@ -36,7 +36,7 @@ body, html {
 }
 
 /* Header */
-.main-header h1 {
+h1 {
     font-family: 'Alegreya', serif;
     font-weight: 600;
     font-size: 3.5rem;
@@ -46,7 +46,7 @@ body, html {
     line-height: 1.1;
 }
 
-.main-header h2 {
+h2 {
     font-family: 'Alegreya', serif;
     font-weight: 400;
     font-size: 1.5rem;
@@ -55,6 +55,39 @@ body, html {
     margin-top: 0;
     margin-bottom: 10px;
     line-height: 1.1;
+}
+
+/* Fix H3 Styling */
+.about h3 {
+    font-family: 'Alegreya', serif;
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: #283618;
+    text-align: left;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    line-height: 1.2;
+}
+
+.about h4 {
+    font-family: 'Alegreya', serif;
+    font-weight: 600;
+	font-style: none;
+    font-size: 1.2rem;
+    color: #283618;
+    text-align: left;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    line-height: 1.2;
+}
+
+.about ul {
+	text-align: left;
+	margin-left: 5%;
 }
 
 /* Info Section */
@@ -86,7 +119,7 @@ body, html {
 
 .icon {
     display: inline-block;
-    width: 20px; /* Increased from 12px by 25% */
+    width: 20px;
     height: 20px;
     margin: 0 5px;
     vertical-align: middle;
@@ -102,7 +135,7 @@ body, html {
 }
 
 .about strong {
-	    color: #e76f51;
+    color: #e76f51;
 }
 
 .about a {
@@ -115,36 +148,16 @@ body, html {
     text-decoration: underline;
 }
 
-.callout p {
-    font-size: 1rem;
-    margin-bottom: 15px;
-    text-align: left;
-    margin-right: 5%;
-    margin-left: 5%;
-	font-style: italic;
-	text-align: center;
-}
-
-.callout a {
-    color: #1d58ba;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-.callout a:hover {
-    text-decoration: underline;
-}
-
 /* Map Section */
 #map { 
-    width: 800px;  /* or your desired width */
-    height: 600px; /* or your desired height */
+    width: 800px;
+    height: 600px;
     position: relative;
 }
 
 .mapboxgl-popup {
-            max-width: 400px;
-            font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    max-width: 400px;
+    font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
 }
 
 .mapboxgl-canvas {
