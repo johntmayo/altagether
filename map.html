@@ -198,46 +198,6 @@
 
     <div class="background"></div>
 
-<!--
-    <div class="central-box">
-      <div class="about">
-<p><strong>Town Hall with After The Fire USA:</strong> <a href="https://www.youtube.com/watch?v=jfwSz6SFSf0&ab_channel=StefanieLynch" target=blank>Watch the recording here.</a></p><p>Following the Eaton Fire, wildfire survivors from After the Fire USA sit down with Altadena residents to talk about the road ahead and answer questions.</p>
-      </div>
-    </div>
-
-
-    <div class="central-box">
-        <header class="main-header">
-            <h1>ALTAGETHER</h1>
-            <h2>Keep Altadena together.</h2>
-        </header>
-        <div class="info">
-                      <div class="divider">
-                <img src="./Keep Altadena Together_files/mountain.svg" alt="Mountain Icon" class="icon">
-                      </div>
-
-            <p>Are you an Altadena resident and you have a question or need support?
-            <br>Call <strong class="phone-number">(626) 889-DENA</strong> or email <a href="mailto:info@altagether.org">info@altagether.org</a> and a neighbor will help you out.</p>
-            <div class="divider">
-                <img src="./Keep Altadena Together_files/tree.svg" alt="Tree Icon" class="icon">
-            </div>
-        </div>
-        <div class="about">
-            <p>Following the destruction of the Eaton fire, our goal is to keep residents in Altadena by connecting them with resources and with each other. We are organizing systems for collective recovery and empowering our neighbors to support each other directly throughout the entirety of this disaster.</p>
-            <p>You can help us do this by serving as a zone captain. Zone captains serve as liaisons for their micro-neighborhood and are responsible for connecting with about 40 of their neighbors and ensuring they are supported during this process. <a href="https://docs.google.com/forms/d/e/1FAIpQLSdJ71LUD9B5z-SJQS_gGmbDWWSR1muPfGIDHU8qKGs6mTJzjQ/viewform?usp=sharing" target="_blank">Sign up to be a Zone Captain</a> for your neighbors.</p>
-		</div>
-  
-		<div class="divider">
-          <img src="./Keep Altadena Together_files/mountain.svg" alt="Mountain Icon" class="icon">
-        </div>
-		
-		<div class="callout">
-			<p>Due to the fires, CA Governor Newsom issued an <a href="https://www.gov.ca.gov/2025/01/14/governor-newsom-issues-order-to-protect-fire-victims-from-predatory-real-estate-speculators/">Executive Order</a> prohibiting predatory, unsolicited offers to buy property in 91001, 91104, 91106, 91107 for any amount less than fair market value of the property on January 6, 2025.</p>
-            <p>This law is in effect until April 7, 2025.</p>	  
-            <p>Report violations to the CA Attorney General’s office <a href="http://oag.ca.gov/report">here.</a></p>
-    </div>
-    </div>
--->
 <div class="central-box mapbox">
       <div id="map"></div>
 
@@ -271,7 +231,7 @@
               'fill-color': [
                 'case',
                 ['==', ['get', 'Status'], 'Approved'],
-                '#4100BF', // Darker blue for approved polygons
+                '#4100BF', // Darker blue for Approved polygons
                 '#006CC4'     // Default blue for other polygons
               ],
               'fill-opacity': [
@@ -282,6 +242,11 @@
               ]
             }
           });
+		  
+		  
+		  
+		 
+		  
       
           // Add outline layer to display a border for every polygon
           map.addLayer({
