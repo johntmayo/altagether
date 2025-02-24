@@ -210,5 +210,30 @@ h2 {
     width: 800px !important;
 }
 
+@media (max-width: 768px) {
+    #map {
+        width: 100% !important; /* Ensures it doesn't spill off-screen */
+        height: 50vh; /* Keeps it visible but not too tall */
+        margin: 0 auto; /* Centers it properly */
+        display: block; /* Prevents layout issues */
+        overflow: hidden; /* Stops any weird spillover */
+    }
+
+    .mapboxgl-canvas {
+        width: 100% !important; /* Forces the actual map to match container */
+        height: 100% !important;
+    }
+
+    .mapboxgl-control-container {
+        position: absolute;
+        bottom: 10px; /* Moves controls so they aren't in the way */
+        left: 10px;
+        right: 10px;
+    }
+	
+	
 
 
+
+
+}
