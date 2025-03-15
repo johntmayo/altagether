@@ -227,18 +227,15 @@
           center: [-118.137610, 34.189420], // Adjust to your map's center
           zoom: 12.5
         });
-        
-        map.on('load', () => {
       
+        map.on('load', () => {
           // Add the vector source
           map.addSource('polygons', {
             type: 'vector',
             url: 'mapbox://altagether.cm64fisju135z1qqmifs0zty5-4swrp'
           });
       
-          // Add polygon fill layer with dynamic fill color:
-          // If the feature's Status property is "Approved", use a darker blue (#00008B),
-          // otherwise, use the default blue (#088).
+          // Add polygon fill layer
           map.addLayer({
             id: 'polygon-layer',
             type: 'fill',
@@ -247,56 +244,49 @@
             paint: {
               'fill-color': [
                 'case',
-                ['==', ['get', 'Status'], 'Approved'],
-                '#4100BF', // Darker blue for Approved polygons
-                '#006CC4'     // Default blue for other polygons
+                ['==', ['get', 'Status'], 'Confirmed'],
+                '#4100BF', // Darker blue for Confirmed polygons
+                '#006CC4'  // Default blue for other polygons
               ],
               'fill-opacity': [
                 'case',
-                ['==', ['get', 'Status'], 'Approved'],
-                0.6,       // More opaque for approved polygons
-                0.2        // Default opacity for others
+                ['==', ['get', 'Status'], 'Confirmed'],
+                0.6, // More opaque for Confirmed polygons
+                0.2  // Default opacity for others
               ]
             }
           });
-		  
-		  
-		  
-		 
-		  
       
-          // Add outline layer to display a border for every polygon
+          // Add outline layer for polygons
           map.addLayer({
             id: 'polygon-outline',
             type: 'line',
             source: 'polygons',
-            'source-layer': 'zones', // Corrected to the proper source layer
+            'source-layer': 'zones',
             paint: {
               'line-color': '#1788BA',
               'line-width': 2,
               'line-opacity': 0.8
             }
           });
-
+      
           // Add address labels
           map.addLayer({
             id: 'address-labels',
             type: 'symbol',
-            source: 'polygons',        // or another source that contains your address features
-            'source-layer': 'zones', // adjust this to match your data's source layer name
+            source: 'polygons',
+            'source-layer': 'zones',
             layout: {
-              // Concatenate the house number and street name
               'text-field': ['concat', ['get', 'housenum'], ' ', ['get', 'street']],
               'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
               'text-size': 12,
-              // Optionally, you can adjust minzoom/maxzoom here
               'text-max-width': 8
             },
             paint: {
               'text-color': '#000'
             }
-          });          
-          
+          });
+      
           // Create a source for the hovered feature (initially empty)
           map.addSource('hover-feature', {
             type: 'geojson',
@@ -306,24 +296,23 @@
             }
           });
       
-          // Add a layer for the hovered feature with a different fill color (and border)
+          // Add a layer for the hovered feature with a different fill color
           map.addLayer({
             id: 'hover-layer',
             type: 'fill',
             source: 'hover-feature',
             paint: {
-              'fill-color': '#006CC4',       // Change fill color on hover
+              'fill-color': '#006CC4',
               'fill-opacity': 0.5,
-              'fill-outline-color': '#000'   // Ensures the hovered polygon still has a border
+              'fill-outline-color': '#000'
             }
           });
       
-          // Change mouse cursor when hovering over a polygon
+          // Change cursor when hovering over a polygon
           map.on('mouseenter', 'polygon-layer', () => {
             map.getCanvas().style.cursor = 'pointer';
           });
       
-          // Clear hover styling and reset the cursor when leaving the polygon layer
           map.on('mouseleave', 'polygon-layer', () => {
             map.getCanvas().style.cursor = '';
             map.getSource('hover-feature').setData({
@@ -332,8 +321,7 @@
             });
           });
       
-          // Update the hover source as the user moves over a polygon,
-          // wrapping the feature in a FeatureCollection.
+          // Update the hover source on mouse move
           map.on('mousemove', 'polygon-layer', (e) => {
             if (e.features.length > 0) {
               const feature = e.features[0];
@@ -344,7 +332,7 @@
             }
           });
         });
-        
+      
         // Create and add the geocoder (search bar)
         const geocoder = new MapboxGeocoder({
           accessToken: mapboxgl.accessToken,
@@ -353,55 +341,77 @@
           placeholder: 'Search for your address'
         });
         map.addControl(geocoder);
-		
-		
-        
+      
         // Listen for geocoder search result selection
         geocoder.on('result', async (e) => {
           const searchResult = e.result;
           const point = searchResult.geometry;
-        
+      
           // Query features at the searched point
           const features = map.queryRenderedFeatures(
             map.project([point.coordinates[0], point.coordinates[1]]),
             { layers: ['polygon-layer'] }
           );
-        
+      
           if (features.length > 0) {
-            // Found a polygon at this point
             const properties = features[0].properties;
-            
+      
+            // Split multiple captains' details using `;` as a delimiter
+            const names = properties.ContactName ? properties.ContactName.split(';') : [];
+            const phones = properties.ContactPhone ? properties.ContactPhone.split(';') : [];
+            const emails = properties.ContactEmail ? properties.ContactEmail.split(';') : [];
+      
+            let captainInfo = "";
+            for (let i = 0; i < names.length; i++) {
+              captainInfo += `
+                <p><strong>Captain ${i + 1}:</strong> ${names[i] || 'N/A'}</p>
+                <p>Phone: ${phones[i] || 'N/A'}</p>
+                <p>Email: ${emails[i] || 'N/A'}</p>
+                <hr>
+              `;
+            }
+      
             new mapboxgl.Popup()
               .setLngLat(point.coordinates)
               .setHTML(`
                 <h3>${properties.ZoneName || 'N/A'}</h3>
-                <p>Captain: ${properties.ContactName || 'N/A'}</p>
-                <p>Phone: ${properties.ContactPhone || 'N/A'}</p>
-                <p>Email: ${properties.ContactEmail || 'N/A'}</p>
-                <p>Status: ${properties.Status || 'N/A'}</p>
+                ${captainInfo}
+                <p><strong>Status:</strong> ${properties.Status || 'N/A'}</p>
               `)
               .addTo(map);
           } else {
-            // No polygon found at this point
             new mapboxgl.Popup()
               .setLngLat(point.coordinates)
               .setHTML('<p>No zone information available for this location</p>')
               .addTo(map);
           }
         });
-        
-        // Optional: Show properties on polygon click
+      
+        // Show properties on polygon click
         map.on('click', 'polygon-layer', (e) => {
           const properties = e.features[0].properties;
-          
+      
+          // Split multiple captains' details using `;` as a delimiter
+          const names = properties.ContactName ? properties.ContactName.split(';') : [];
+          const phones = properties.ContactPhone ? properties.ContactPhone.split(';') : [];
+          const emails = properties.ContactEmail ? properties.ContactEmail.split(';') : [];
+      
+          let captainInfo = "";
+          for (let i = 0; i < names.length; i++) {
+            captainInfo += `
+              <p><strong>Captain ${i + 1}:</strong> ${names[i] || 'N/A'}</p>
+              <p>Phone: ${phones[i] || 'N/A'}</p>
+              <p>Email: ${emails[i] || 'N/A'}</p>
+              <hr>
+            `;
+          }
+      
           new mapboxgl.Popup()
             .setLngLat(e.lngLat)
             .setHTML(`
               <h3>${properties.ZoneName || 'N/A'}</h3>
-              <p>Captain: ${properties.ContactName || 'N/A'}</p>
-              <p>Phone: ${properties.ContactPhone || 'N/A'}</p>
-              <p>Email: ${properties.ContactEmail || 'N/A'}</p>
-              <p>Status: ${properties.Status || 'N/A'}</p>
+              ${captainInfo}
+              <p><strong>Status:</strong> ${properties.Status || 'N/A'}</p>
             `)
             .addTo(map);
         });
