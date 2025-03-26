@@ -224,18 +224,19 @@
         const map = new mapboxgl.Map({
           container: 'map',
           style: 'mapbox://styles/mapbox/streets-v11',
-          center: [-118.137610, 34.189420], // Adjust to your map's center
-          zoom: 12.5
+          center: [-118.135610, 34.192420], // Adjust to your map's center
+          zoom: 13
         });
       
         map.on('load', () => {
-          // Add the vector source
+          // Add the vector source with promoteId set to "ZoneName"
           map.addSource('polygons', {
             type: 'vector',
-            url: 'mapbox://altagether.cm64fisju135z1qqmifs0zty5-4swrp'
+            url: 'mapbox://altagether.cm64fisju135z1qqmifs0zty5-4swrp',
+            promoteId: 'ZoneName'
           });
       
-          // Add polygon fill layer
+          // Add polygon fill layer using feature state for hover style.
           map.addLayer({
             id: 'polygon-layer',
             type: 'fill',
@@ -244,15 +245,25 @@
             paint: {
               'fill-color': [
                 'case',
-                ['==', ['get', 'Status'], 'Confirmed'],
-                '#4100BF', // Darker blue for Confirmed polygons
-                '#006CC4'  // Default blue for other polygons
+                ['boolean', ['feature-state', 'hover'], false],
+                '#f57c00', // Distinct red color for hover state
+                [
+                  'case',
+                  ['==', ['get', 'Status'], 'Confirmed'],
+                  '#185edd', // Darker blue for Confirmed polygons
+                  '#006CC4'  // Default blue for other polygons
+                ]
               ],
               'fill-opacity': [
                 'case',
-                ['==', ['get', 'Status'], 'Confirmed'],
-                0.6, // More opaque for Confirmed polygons
-                0.2  // Default opacity for others
+                ['boolean', ['feature-state', 'hover'], false],
+                0.5, // Opacity when hovered
+                [
+                  'case',
+                  ['==', ['get', 'Status'], 'Confirmed'],
+                  0.6, // More opaque for Confirmed polygons
+                  0.2  // Default opacity for others
+                ]
               ]
             }
           });
@@ -264,7 +275,7 @@
             source: 'polygons',
             'source-layer': 'zones',
             paint: {
-              'line-color': '#1788BA',
+              'line-color': '#0c41a1',
               'line-width': 2,
               'line-opacity': 0.8
             }
@@ -287,48 +298,45 @@
             }
           });
       
-          // Create a source for the hovered feature (initially empty)
-          map.addSource('hover-feature', {
-            type: 'geojson',
-            data: {
-              type: 'FeatureCollection',
-              features: []
-            }
-          });
-      
-          // Add a layer for the hovered feature with a different fill color
-          map.addLayer({
-            id: 'hover-layer',
-            type: 'fill',
-            source: 'hover-feature',
-            paint: {
-              'fill-color': '#006CC4',
-              'fill-opacity': 0.5,
-              'fill-outline-color': '#000'
-            }
-          });
+          // Variable to track the currently hovered feature
+          let hoveredId = null;
       
           // Change cursor when hovering over a polygon
           map.on('mouseenter', 'polygon-layer', () => {
             map.getCanvas().style.cursor = 'pointer';
           });
       
+          // Clear hover state when the mouse leaves the polygon layer
           map.on('mouseleave', 'polygon-layer', () => {
             map.getCanvas().style.cursor = '';
-            map.getSource('hover-feature').setData({
-              type: 'FeatureCollection',
-              features: []
-            });
+            if (hoveredId !== null) {
+              console.log('Clearing hover for feature:', hoveredId);
+              map.setFeatureState(
+                { source: 'polygons', sourceLayer: 'zones', id: hoveredId },
+                { hover: false }
+              );
+            }
+            hoveredId = null;
           });
       
-          // Update the hover source on mouse move
+          // Update hover state on mouse move with debug logs
           map.on('mousemove', 'polygon-layer', (e) => {
             if (e.features.length > 0) {
               const feature = e.features[0];
-              map.getSource('hover-feature').setData({
-                type: 'FeatureCollection',
-                features: [feature]
-              });
+              console.log('Hovered feature:', feature);
+              if (hoveredId !== null && hoveredId !== feature.id) {
+                console.log('Removing hover from previous feature:', hoveredId);
+                map.setFeatureState(
+                  { source: 'polygons', sourceLayer: 'zones', id: hoveredId },
+                  { hover: false }
+                );
+              }
+              hoveredId = feature.id;
+              console.log('Setting hover for feature:', hoveredId);
+              map.setFeatureState(
+                { source: 'polygons', sourceLayer: 'zones', id: hoveredId },
+                { hover: true }
+              );
             }
           });
         });
@@ -355,8 +363,6 @@
       
           if (features.length > 0) {
             const properties = features[0].properties;
-      
-            // Split multiple captains' details using `;` as a delimiter
             const names = properties.ContactName ? properties.ContactName.split(';') : [];
             const phones = properties.ContactPhone ? properties.ContactPhone.split(';') : [];
             const emails = properties.ContactEmail ? properties.ContactEmail.split(';') : [];
@@ -390,8 +396,6 @@
         // Show properties on polygon click
         map.on('click', 'polygon-layer', (e) => {
           const properties = e.features[0].properties;
-      
-          // Split multiple captains' details using `;` as a delimiter
           const names = properties.ContactName ? properties.ContactName.split(';') : [];
           const phones = properties.ContactPhone ? properties.ContactPhone.split(';') : [];
           const emails = properties.ContactEmail ? properties.ContactEmail.split(';') : [];
