@@ -243,7 +243,18 @@ h2 {
 
 .mapboxgl-popup {
     max-width: 400px;
-    font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    font: 12px/8px 'Nunito', sans-serif;
+    text-align: left;
+}
+
+.mapboxgl-popup h3 {
+    font-size: 16px;
+    padding-bottom: 4px;
+}
+
+.mapboxgl-popup-content {
+    border-radius: 5px !important;
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, .1) !important;
 }
 
 .mapboxgl-canvas {
@@ -262,6 +273,8 @@ h2 {
     .mapboxgl-canvas {
         width: 100% !important; /* Forces the actual map to match container */
         height: 100% !important;
+	touch-action: auto !important;
+ 	pointer-events: auto !important;
     }
 
     .mapboxgl-control-container {
@@ -269,6 +282,8 @@ h2 {
         bottom: 10px; /* Moves controls so they aren't in the way */
         left: 10px;
         right: 10px;
+	top: 0px;
+	pointer-events: none;
     }
 	
 	
