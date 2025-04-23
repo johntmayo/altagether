@@ -35,6 +35,11 @@ body, html {
     text-align: center;
 }
 
+/* Special case for the mapbox to accommodate larger map */
+.mapbox {
+    max-width: 1200px; /* Increased to allow for larger map */
+}
+
 /* Header */
 h1 {
     font-family: 'Alegreya', serif;
@@ -96,14 +101,14 @@ h2 {
 	margin-left: 5%;
 }
 
-
-
-
-
-
-
-
-
+/* Map note styling */
+.map-note {
+    font-style: italic;
+    text-align: center;
+    margin: 15px 10% 10px;
+    font-size: 0.95rem;
+    color: #555;
+}
 
 /* Divider */
 .divider {
@@ -143,8 +148,6 @@ h2 {
     color: #aaa;
     pointer-events: none;
 }
-
-
 
 /* About Section */
 .about p {
@@ -232,13 +235,12 @@ h2 {
     margin: 0 5%;
 }
 
-
-
-/* Map Section */
+/* Map Section - Enlarged by 50% */
 #map { 
-    width: 800px;
-    height: 600px;
+    width: 1200px;
+    height: 900px;
     position: relative;
+    margin: 0 auto; /* Center the map */
 }
 
 .mapboxgl-popup {
@@ -258,7 +260,7 @@ h2 {
 }
 
 .mapboxgl-canvas {
-    width: 800px !important;
+    width: 1200px !important;
 }
 
 @media (max-width: 768px) {
@@ -273,8 +275,8 @@ h2 {
     .mapboxgl-canvas {
         width: 100% !important; /* Forces the actual map to match container */
         height: 100% !important;
-	touch-action: auto !important;
- 	pointer-events: auto !important;
+        touch-action: auto !important;
+        pointer-events: auto !important;
     }
 
     .mapboxgl-control-container {
@@ -282,13 +284,7 @@ h2 {
         bottom: 10px; /* Moves controls so they aren't in the way */
         left: 10px;
         right: 10px;
-	top: 0px;
-	pointer-events: none;
+        top: 0px;
+        pointer-events: none;
     }
-	
-	
-
-
-
-
 }
