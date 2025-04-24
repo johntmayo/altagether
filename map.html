@@ -207,7 +207,7 @@
                 } else {
                     new mapboxgl.Popup()
                       .setLngLat(point.coordinates)
-                      .setHTML('<p>No zone information available for this location</p>')
+					  .setHTML('<p>There is not yet a Neighborhood Captain for this location. Would you like to <a href="interest_form.html" target="_blank">volunteer as a captain</a> for your area?</p>')
                       .addTo(map);
                 }
             });

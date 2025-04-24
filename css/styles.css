@@ -245,7 +245,7 @@ h2 {
 
 .mapboxgl-popup {
     max-width: 400px;
-    font: 12px/8px 'Nunito', sans-serif;
+    font: 12px/12px 'Nunito', sans-serif;
     text-align: left;
 }
 
