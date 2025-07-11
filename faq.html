@@ -75,13 +75,8 @@
         <header class="main-header">
             <h1>Altagether</h1>
 			<h2>Keep Altadena together.</h2>
-			<nav class="site-nav">
-				<a href="index.html">Home</a> | 
-				<a href="map.html">Find Your Neighborhood Captain</a> | 
-				<a href="captains.html">FAQ</a> | 
-				<a href="interest_form.html">Sign Up</a> | 
-				<a href="https://pasadena.fcsuite.com/erp/donate/create/fund?funit_id=6423" target="_blank">Donate</a>
-			</nav>
+			<div id="nav-placeholder"></div>
+
 		</header>
         
 		<div class="about">
@@ -169,18 +164,6 @@
                 </div>
             </div>
 
-            <div class="faq-section">
-                <div class="faq-header" onclick="toggleFAQ(this)">
-                    <h4>Who runs Altagether?</h4>
-                    <span class="faq-toggle">▼</span>
-                </div>
-                <div class="faq-content">
-                    <p><strong>John Mayo, Executive Director</strong></p>
-                    <p>John has called Altadena home since 2019, living on Madison Ave & Sacramento. He's a member of the Eagles 719 and was a frequent visitor to POV, Rancho, and Altadena Hardware to name a few. He doesn't hike as much as he should but he still loves the mountains at sunset and strolling around town with his dog. John brings professional experience as a training specialist and community organizer to Altagether, most recently as Lead Training Strategist for the Harris/Biden campaign in Wisconsin where he supported organizers and volunteer teams statewide.</p>
-                    <p><strong>Stefanie Lynch, Facilitator & Co-Founder</strong></p>
-                    <p>Stef is a resident of Highland Park whose extensive background in community organizing includes years with Planned Parenthood, working out of their Lake Avenue office across from Fox's. She served as Lead Organizer for Yes on Measure A in 2022, leading field strategy and operations while building coalitions with organizations including ACLU Southern California, Black Lives Matter-LA, Dignity & Power Now, and UNITE Here 11. Stef's connection to Altadena deepened when her best friends lost their home on Loma Alta and moved in with her.</p>
-                </div>
-            </div>
 
             <div class="faq-section">
                 <div class="faq-header" onclick="toggleFAQ(this)">
@@ -251,5 +234,14 @@
             content.classList.toggle('active');
         }
     </script>
+	<script>
+// Load navigation
+fetch('nav.html')
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById('nav-placeholder').innerHTML = data;
+    })
+    .catch(error => console.error('Error loading navigation:', error));
+</script>
 </body>
 </html>

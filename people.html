@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our People - Altagether</title>
+    <link rel="stylesheet" href="css/styles.css">
+	<link rel="icon" href="assets/images/altagether.png" type="image/png">
+	<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,600;0,700;1,400&family=Nunito:wght@400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="background"></div>
+
+    <div class="central-box">
+        <header class="main-header">
+            <h1>Altagether</h1>
+			<h2>Keep Altadena together.</h2>
+			<div id="nav-placeholder"></div>
+
+		</header>
+	
+        <div class="about">
+            <h3>Our People</h3>
+            <p>Altagether is powered by the dedication and passion of our community members, from our grassroots Neighborhood Captains to our experienced leadership team and advisory board.</p>
+        </div>
+
+        <div class="divider">
+            <img src="assets/images/tree.svg" alt="Tree Icon" class="icon">
+        </div>
+        
+        <div class="about">
+            <h3>Neighborhood Captains</h3>
+            <p>Altagether is made up of more than 150 Neighborhood Captains—hyper-local leaders who are organizing their blocks, checking in on neighbors, and working together for collective recovery. Our captains come from every part of the community affected by the Eaton Fire and bring a wide range of perspectives, skills, and passions to their work. Each one organizes in their own way, and together, they form the backbone of Altagether.</p>
+        </div>
+
+        <div class="divider">
+            <img src="assets/images/mountain.svg" alt="Mountain Icon" class="icon">
+        </div>
+
+        <div class="about">
+            <h3>Leadership</h3>
+            
+            <h4>John Mayo, Executive Director</h4>
+            <p>John has been an Altadena resident since 2019, living on Madison Ave & Sacramento. He is a member of the Eagles 719 and was a regular at local businesses including POV, Rancho, and Altadena Hardware. John brings professional experience as a training specialist and community organizer to Altagether, most recently serving as Lead Training Strategist for the Harris/Biden campaign in Wisconsin where he supported organizers and volunteer teams statewide.</p>
+            
+            <h4>Stefanie Lynch, Facilitator & Co-Founder</h4>
+            <p>Stef is a resident of Highland Park whose extensive background in community organizing includes years with Planned Parenthood, working out of their Lake Avenue office across from Fox's. She served as Lead Organizer for Yes on Measure A in 2022, leading field strategy and operations while building coalitions with organizations including ACLU Southern California, Black Lives Matter-LA, Dignity & Power Now, and UNITE Here 11. Stef's connection to Altadena deepened when her best friends lost their home on Loma Alta and moved in with her.</p>
+        </div>
+
+        <div class="divider">
+            <img src="assets/images/tree.svg" alt="Tree Icon" class="icon">
+        </div>
+
+        <div class="about">
+            <h3>Advisory Board</h3>
+            
+            <h4>Dr. Katie Clark</h4>
+            <p>Dr. Katie Clark is a three-time elected member of the Altadena Library District Board of Trustees, serving since 2018 and as Board President from 2019-2021. She holds a DPhil from Oxford University and is the Principal & Founder of The Applied Humanities consulting agency.</p>
+            
+            <h4>Gina Clayton-Johnson</h4>
+            <p>Gina Clayton-Johnson is the founder and Executive Director of Essie Justice Group, which she founded in 2014. She holds a J.D. from Harvard Law School and is a 2017 recipient of the Grinnell Prize for social justice work.</p>
+            
+            <h4>Esq. Rémy De La Peza</h4>
+            <p>Esq. Rémy De La Peza is a community lawyer with nearly 20 years of experience in land use, affordable housing, and equitable community development. She is the founder and principal of morena strategies and holds a J.D. from Loyola Law School in Los Angeles.</p>
+            
+            <h4>Dr. John Dobard</h4>
+            <p>Dr. John Dobard is Vice President of Policy and Programs at Catalyst California, where he leads efforts to eliminate racial and economic disparities in political participation and government responsiveness.</p>
+            
+            <h4>Christian Esperias</h4>
+            <p>Christian Esperias is a political consultant and founder of Esperias Strategies. He currently works at the Department of Angels where he supports community organizing efforts in communities impacted by the Eaton and Palisades Fires.</p>
+        </div>
+
+        <div class="divider">
+            <img src="assets/images/mountain.svg" alt="Mountain Icon" class="icon">
+        </div>
+
+        <div class="contact-info">
+			<p>Email: <a href="mailto:info@altagether.org">info@altagether.org</a></p>
+			<p>Instagram: <a href="https://www.instagram.com/altagether91001/" target="_blank">@altagether91001</a></p>
+		</div>
+    </div>
+
+    <script src="js/main.js"></script>
+	<script>
+// Load navigation
+fetch('nav.html')
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById('nav-placeholder').innerHTML = data;
+    })
+    .catch(error => console.error('Error loading navigation:', error));
+</script>
+</body>
+</html>

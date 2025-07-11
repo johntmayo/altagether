@@ -16,13 +16,8 @@
           <header class="main-header">
             <h1>Altagether</h1>
 			<h2>Keep Altadena together.</h2>
-			<nav class="site-nav">
-				<a href="index.html">Home</a> | 
-				<a href="map.html">Find Your Neighborhood Captain</a> | 
-				<a href="captains.html">FAQ</a> | 
-				<a href="interest_form.html">Sign Up</a> | 
-				<a href="https://pasadena.fcsuite.com/erp/donate/create/fund?funit_id=6423" target="_blank">Donate</a>
-			</nav>
+			<div id="nav-placeholder"></div>
+
 		</header>
 	
         <div class="about">
@@ -81,6 +76,14 @@
 
 
 
-
+<script>
+// Load navigation
+fetch('nav.html')
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById('nav-placeholder').innerHTML = data;
+    })
+    .catch(error => console.error('Error loading navigation:', error));
+</script>
 </body>
 </html>
