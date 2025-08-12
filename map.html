@@ -29,30 +29,128 @@
 			<p>This interactive map represents our community's growing network of Neighborhood Captains. Search for your address to find your local captain, then reach out to them directly using the contact information provided. Our goal is to have captains throughout all of Altadena to ensure everyone has a local point of contact for support and information. If there isn't a captain in your area yet, please consider <a href="interest_form.html">signing up yourself!</a></p>
 		</div>
 
-        <div id="map"></div>
+
+
+
+    <div id="map" class="mapboxgl-map">
         
-        
-		<p class="map-note">This map exists to help neighbors find each other, connect, and organize in the wake of a disaster that upended our lives. It is a tool for mutual aid, not a marketing list. If you are a business or third-party organization using this map to solicit Neighborhood Captains, please reconsider. It's not just inappropriate — it undermines the spirit of community recovery we’re trying to build. Do better.</p>
-        <script>
-            // Initialize Mapbox map
-            mapboxgl.accessToken = 'pk.eyJ1IjoiYWx0YWdldGhlciIsImEiOiJjbTY0ZWdqMDkweHZ4MnBwdTg3OGVrbmhyIn0.FyctMHs1MC4EUbDY56-AoA';
-            const map = new mapboxgl.Map({
-                container: 'map',
-                style: 'mapbox://styles/mapbox/streets-v11',
-                center: [-118.135610, 34.192420], // Adjust to your map's center
-                zoom: 13
-            });
+      <!-- Satellite View Toggle        
+              <button id="toggleStyle">
+                <span class="icon">
+                  <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7.875 6.32812L12.4961 4.25L7.875 2.19922L3.22656 4.25L7.875 6.32812ZM14.1094 3.53906L15.75 4.25L14.1094 4.98828L7.875 7.75L1.61328 4.98828L0 4.25L1.61328 3.53906L7.875 0.75L14.1094 3.53906ZM4.45703 7.20312L3.22656 7.75L7.875 9.82812L12.4961 7.75L11.2656 7.20312L12.8789 6.49219L14.1094 7.03906L15.75 7.75L14.1094 8.48828L7.875 11.25L1.61328 8.48828L0 7.75L1.61328 7.03906L2.84375 6.49219L4.45703 7.20312ZM2.84375 9.99219L4.45703 10.7031L3.22656 11.25L7.875 13.3281L12.4961 11.25L11.2656 10.7031L12.8789 9.99219L14.1094 10.5391L15.75 11.25L14.1094 11.9883L7.875 14.75L1.61328 11.9883L0 11.25L1.61328 10.5391L2.84375 9.99219Z" fill="#747474"/>
+                  </svg>              
+                </span>
+                Toggle View
+              </button>
+       -->
+      
+      <!-- ======================
+           Toggle Controls (HTML)
+           ====================== -->
+           <div id="toggleDINSContainer">
+            <div id="legendTitle">
+              <input type="checkbox" id="toggleDINS">
+              <label for="toggleDINS">Damage</label>
+            </div>
+            <!-- Legend: Hidden by default; only shows when toggleDINS is checked -->
+            <div id="dinsLegend">
+              <span class="legend-item">
+                <span class="legend-circle" style="background: red;"></span>Destroyed
+              </span>
+              <span class="legend-item">
+                <span class="legend-circle" style="background: yellow;"></span>Damaged
+              </span>
+              <span class="legend-item">
+                <span class="legend-circle" style="background: green;"></span>No Damage
+              </span>
+            </div>
           
-            map.on('load', () => {
-                // Add the vector source with promoteId set to "ZoneName"
-                map.addSource('polygons', {
+            <!-- New “Perimeter” toggle (starts OFF) -->
+            <div id="perimeterTitle">
+              <input type="checkbox" id="togglePerimeter">
+              <label for="togglePerimeter">Perimeter</label>
+            </div>
+          </div>
+          
+          <!-- (Your existing Mapbox canvas and control container go here) -->
+          <div class="mapboxgl-canary" style="visibility: hidden;"></div>
+          <div class="mapboxgl-canvas-container mapboxgl-interactive mapboxgl-touch-drag-pan mapboxgl-touch-zoom-rotate">
+            <canvas class="mapboxgl-canvas" tabindex="0" aria-label="Map" role="region" width="1600" height="1200" style="width: 800px; height: 600px;"></canvas>
+          </div>
+          <div class="mapboxgl-control-container">
+            <div class="mapboxgl-ctrl-top-left"></div>
+            <div class="mapboxgl-ctrl-top-right">
+              <div class="mapboxgl-ctrl-geocoder mapboxgl-ctrl">
+                <svg class="mapboxgl-ctrl-geocoder--icon mapboxgl-ctrl-geocoder--icon-search" viewBox="0 0 18 18" xml:space="preserve" width="18" height="18">
+                  <path d="M7.4 2.5c-2.7 0-4.9 2.2-4.9 4.9s2.2 4.9 4.9 4.9c1 0 1.8-.2 2.5-.8l3.7 3.7c.2.2.4.3.8.3.7 0 1.1-.4 1.1-1.1 0-.3-.1-.5-.3-.8L11.4 10c.4-.8.8-1.6.8-2.5.1-2.8-2.1-5-4.8-5zm0 1.6c1.8 0 3.2 1.4 3.2 3.2s-1.4 3.2-3.2 3.2-3.3-1.3-3.3-3.1 1.4-3.3 3.3-3.3z"></path>
+                </svg>
+                <input type="text" class="mapboxgl-ctrl-geocoder--input" placeholder="Search for your address" aria-label="Search for your address">
+                <div class="suggestions-wrapper">
+                  <ul class="suggestions" style="display: none;"></ul>
+                </div>
+                <div class="mapboxgl-ctrl-geocoder--pin-right">
+                  <button aria-label="Clear" class="mapboxgl-ctrl-geocoder--button">
+                    <svg class="mapboxgl-ctrl-geocoder--icon mapboxgl-ctrl-geocoder--icon-close" viewBox="0 0 18 18" xml:space="preserve" width="18" height="18">
+                      <path d="M3.8 2.5c-.6 0-1.3.7-1.3 1.3 0 .3.2.7.5.8L7.2 9 3 13.2c-.3.3-.5.7-.5 1 0 .6.7 1.3 1.3 1.3.3 0 .7-.2 1-.5L9 10.8l4.2 4.2c.2.3.7.3 1 .3.6 0 1.3-.7 1.3-1.3 0-.3-.2-.7-.3-1l-4.4-4L15 4.6c.3-.2.5-.5.5-.8 0-.7-.7-1.3-1.3-1.3-.3 0-.7.2-1 .3L9 7.1 4.8 2.8c-.3-.1-.7-.3-1-.3z"></path>
+                    </svg>
+                  </button>
+                  <svg class="mapboxgl-ctrl-geocoder--icon mapboxgl-ctrl-geocoder--icon-loading" viewBox="0 0 18 18" xml:space="preserve" width="18" height="18">
+                    <path fill="#333" d="M4.4 4.4l.8.8c2.1-2.1 5.5-2.1 7.6 0l.8-.8c-2.5-2.5-6.7-2.5-9.2 0z"></path>
+                    <path opacity=".1" d="M12.8 12.9c-2.1 2.1-5.5 2.1-7.6 0-2.1-2.1-2.1-5.5 0-7.7l-.8-.8c-2.5 2.5-2.5 6.7 0 9.2s6.6 2.5 9.2 0 2.5-6.6 0-9.2l-.8.8c2.2 2.1 2.2 5.6 0 7.7z"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mapboxgl-ctrl-bottom-left">
+            <div class="mapboxgl-ctrl" style="display: block;">
+              <a class="mapboxgl-ctrl-logo" target="_blank" rel="noopener nofollow" href="https://www.mapbox.com/" aria-label="Mapbox logo"></a>
+            </div>
+          </div>
+          <div class="mapboxgl-ctrl-bottom-right">
+            <div class="mapboxgl-ctrl mapboxgl-ctrl-attrib">
+              <button class="mapboxgl-ctrl-attrib-button" type="button" aria-label="Toggle attribution">
+                <span class="mapboxgl-ctrl-icon" aria-hidden="true" title="Toggle attribution"></span>
+              </button>
+              <div class="mapboxgl-ctrl-attrib-inner" role="list">
+                <a href="https://www.mapbox.com/about/maps/" target="_blank" title="Mapbox" aria-label="Mapbox">© Mapbox</a>
+                <a href="https://www.openstreetmap.org/about/" target="_blank" title="OpenStreetMap" aria-label="OpenStreetMap">© OpenStreetMap</a>
+                <a class="mapbox-improve-map" href="https://apps.mapbox.com/feedback/?owner=mapbox&amp;id=streets-v11&amp;access_token=pk.eyJ1IjoiYWx0YWdldGhlciIsImEiOiJjbTY0ZWdqMDkweHZ4MnBwdTg3OGVrbmhyIn0.FyctMHs1MC4EUbDY56-AoA#/-118.13761/34.18942/12.5" target="_blank" aria-label="Map feedback" rel="noopener nofollow">Improve this map</a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- =========================
+               JavaScript (Mapbox + Toggles)
+               ========================= -->
+          <script>
+            document.addEventListener('DOMContentLoaded', function() {
+              console.log("Script loaded and DOM is ready");
+          
+              // Set your Mapbox access token
+              mapboxgl.accessToken = 'pk.eyJ1IjoiYWx0YWdldGhlciIsImEiOiJjbTY0ZWdqMDkweHZ4MnBwdTg3OGVrbmhyIn0.FyctMHs1MC4EUbDY56-AoA';
+              let currentStyle = 'streets-v11';
+          
+              // Initialize the map
+              const map = new mapboxgl.Map({
+                container: 'map',
+                style: `mapbox://styles/mapbox/${currentStyle}`,
+                center: [-118.135610, 34.192420],
+                zoom: 13
+              });
+          
+              // Add polygon source & layers (unchanged)
+              function addCustomLayers() {
+                if (!map.getSource('polygons')) {
+                  map.addSource('polygons', {
                     type: 'vector',
                     url: 'mapbox://altagether.cm64fisju135z1qqmifs0zty5-4swrp',
                     promoteId: 'ZoneName'
-                });
-          
-                // Add polygon fill layer using feature state for hover style.
-                map.addLayer({
+                  });
+                }
+                if (!map.getLayer('polygon-layer')) {
+                  map.addLayer({
                     id: 'polygon-layer',
                     type: 'fill',
                     source: 'polygons',
@@ -61,181 +159,245 @@
                       'fill-color': [
                         'case',
                         ['boolean', ['feature-state', 'hover'], false],
-                        '#f57c00', // Distinct red color for hover state
-                        [
-                          'case',
-                          ['==', ['get', 'Status'], 'Confirmed'],
-                          '#185edd', // Darker blue for Confirmed polygons
-                          '#006CC4'  // Default blue for other polygons
-                        ]
+                        '#f57c00',
+                        ['case', ['==', ['get', 'Status'], 'Confirmed'], '#185edd', '#006CC4']
                       ],
                       'fill-opacity': [
                         'case',
                         ['boolean', ['feature-state', 'hover'], false],
-                        0.5, // Opacity when hovered
-                        [
-                          'case',
-                          ['==', ['get', 'Status'], 'Confirmed'],
-                          0.6, // More opaque for Confirmed polygons
-                          0.2  // Default opacity for others
-                        ]
+                        0.2,
+                        ['case', ['==', ['get', 'Status'], 'Confirmed'], 0.2, 0.05]
                       ]
                     }
-                });
-          
-                // Add outline layer for polygons
-                map.addLayer({
+                  });
+                }
+                if (!map.getLayer('polygon-outline')) {
+                  map.addLayer({
                     id: 'polygon-outline',
                     type: 'line',
                     source: 'polygons',
                     'source-layer': 'zones',
                     paint: {
                       'line-color': '#0c41a1',
-                      'line-width': 2,
-                      'line-opacity': 0.8
+                      'line-width': 1.5,
+                      'line-opacity': 0.5
                     }
-                });
+                  });
+                }
+              }
           
-                // Add address labels
-                map.addLayer({
-                    id: 'address-labels',
-                    type: 'symbol',
-                    source: 'polygons',
-                    'source-layer': 'zones',
-                    layout: {
-                      'text-field': ['concat', ['get', 'housenum'], ' ', ['get', 'street']],
-                      'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
-                      'text-size': 12,
-                      'text-max-width': 8
-                    },
+              // ======================================================================================
+              // DINS LAYER (unchanged)
+              // ======================================================================================
+              function addDINSLayer() {
+                console.log("Adding DINS layer");
+                if (!map.getSource('dins')) {
+                  map.addSource('dins', {
+                    type: 'vector',
+                    url: 'mapbox://altagether.bu6l5c8j'
+                  });
+                }
+                if (!map.getLayer('dins-layer')) {
+                  map.addLayer({
+                    id: 'dins-layer',
+                    type: 'circle',
+                    source: 'dins',
+                    'source-layer': 'DINS_2025_Eaton_Public_View-0zn1cz',
                     paint: {
-                      'text-color': '#000'
+                      'circle-radius': 2.5,
+                      'circle-color': [
+                        'case',
+                        ['==', ['get', 'DAMAGE'], 'No Damage'], 'green',
+                        ['==', ['get', 'DAMAGE'], 'Affected (1-9%)'], 'yellow',
+                        ['==', ['get', 'DAMAGE'], 'Minor (10-25%)'], 'yellow',
+                        ['==', ['get', 'DAMAGE'], 'Major (26-50%)'], 'yellow',
+                        ['==', ['get', 'DAMAGE'], 'Destroyed (>50%)'], 'red',
+                        '#000000'
+                      ]
                     }
-                });
+                  });
+                } else {
+                  map.setLayoutProperty('dins-layer', 'visibility', 'visible');
+                }
+              }
           
-                // Variable to track the currently hovered feature
+              function removeDINSLayer() {
+                console.log("Removing DINS layer");
+                if (map.getLayer('dins-layer')) {
+                  map.setLayoutProperty('dins-layer', 'visibility', 'none');
+                }
+              }
+          
+              // ======================================================================================
+              // NEW “PERIMETER” LAYER
+              // ======================================================================================
+              function addPerimeterLayer() {
+                console.log("Adding Perimeter layer");
+                if (!map.getSource('perimeter')) {
+                  map.addSource('perimeter', {
+                    type: 'vector',
+                    url: 'mapbox://altagether.21obglbu'
+                  });
+                }
+                if (!map.getLayer('perimeter-layer')) {
+                  map.addLayer({
+                    id: 'perimeter-layer',
+                    type: 'line',
+                    source: 'perimeter',
+                    'source-layer': 'Eaton_Perimeter_20250121-bhnm45',
+                    paint: {
+                      'line-color': '#FF00FF',
+                      'line-width': 2
+                    }
+                  });
+                } else {
+                  map.setLayoutProperty('perimeter-layer', 'visibility', 'visible');
+                }
+              }
+          
+              function removePerimeterLayer() {
+                console.log("Removing Perimeter layer");
+                if (map.getLayer('perimeter-layer')) {
+                  map.setLayoutProperty('perimeter-layer', 'visibility', 'none');
+                }
+              }
+          
+              // Once the map loads, add base layers (no toggles run initially)
+              map.on('load', () => {
+                addCustomLayers();
+          
+                // Neither DINS nor Perimeter is checked by default, so nothing is added here.
+          
+                // Add the geocoder control
+                const geocoder = new MapboxGeocoder({
+                  accessToken: mapboxgl.accessToken,
+                  mapboxgl: mapboxgl,
+                  marker: true,
+                  placeholder: 'Search for your address'
+                });
+                map.addControl(geocoder);
+          
+                // Hover interaction for polygons (unchanged)
                 let hoveredId = null;
-          
-                // Change cursor when hovering over a polygon
                 map.on('mouseenter', 'polygon-layer', () => {
-                    map.getCanvas().style.cursor = 'pointer';
+                  map.getCanvas().style.cursor = 'pointer';
                 });
-          
-                // Clear hover state when the mouse leaves the polygon layer
                 map.on('mouseleave', 'polygon-layer', () => {
-                    map.getCanvas().style.cursor = '';
-                    if (hoveredId !== null) {
-                      console.log('Clearing hover for feature:', hoveredId);
+                  map.getCanvas().style.cursor = '';
+                  if (hoveredId !== null) {
+                    map.setFeatureState(
+                      { source: 'polygons', sourceLayer: 'zones', id: hoveredId },
+                      { hover: false }
+                    );
+                  }
+                  hoveredId = null;
+                });
+                map.on('mousemove', 'polygon-layer', (e) => {
+                  if (e.features.length > 0) {
+                    const feature = e.features[0];
+                    if (hoveredId !== null && hoveredId !== feature.id) {
                       map.setFeatureState(
                         { source: 'polygons', sourceLayer: 'zones', id: hoveredId },
                         { hover: false }
                       );
                     }
-                    hoveredId = null;
+                    hoveredId = feature.id;
+                    map.setFeatureState(
+                      { source: 'polygons', sourceLayer: 'zones', id: hoveredId },
+                      { hover: true }
+                    );
+                  }
                 });
           
-                // Update hover state on mouse move with debug logs
-                map.on('mousemove', 'polygon-layer', (e) => {
-                    if (e.features.length > 0) {
-                      const feature = e.features[0];
-                      console.log('Hovered feature:', feature);
-                      if (hoveredId !== null && hoveredId !== feature.id) {
-                        console.log('Removing hover from previous feature:', hoveredId);
-                        map.setFeatureState(
-                          { source: 'polygons', sourceLayer: 'zones', id: hoveredId },
-                          { hover: false }
-                        );
-                      }
-                      hoveredId = feature.id;
-                      console.log('Setting hover for feature:', hoveredId);
-                      map.setFeatureState(
-                        { source: 'polygons', sourceLayer: 'zones', id: hoveredId },
-                        { hover: true }
-                      );
-                    }
-                });
-            });
-          
-            // Create and add the geocoder (search bar)
-            const geocoder = new MapboxGeocoder({
-                accessToken: mapboxgl.accessToken,
-                mapboxgl: mapboxgl,
-                marker: true,
-                placeholder: 'Search for your address'
-            });
-            map.addControl(geocoder);
-          
-            // Listen for geocoder search result selection
-            geocoder.on('result', async (e) => {
-                const searchResult = e.result;
-                const point = searchResult.geometry;
-          
-                // Query features at the searched point
-                const features = map.queryRenderedFeatures(
-                    map.project([point.coordinates[0], point.coordinates[1]]),
-                    { layers: ['polygon-layer'] }
-                );
-          
-                if (features.length > 0) {
-                    const properties = features[0].properties;
-                    const names = properties.ContactName ? properties.ContactName.split(';') : [];
-                    const phones = properties.ContactPhone ? properties.ContactPhone.split(';') : [];
-                    const emails = properties.ContactEmail ? properties.ContactEmail.split(';') : [];
-          
-                    let captainInfo = "";
-                    for (let i = 0; i < names.length; i++) {
-                      captainInfo += `
-                        <p><strong>Captain ${i + 1}:</strong> ${names[i] || 'N/A'}</p>
-                        <p>Phone: ${phones[i] || 'N/A'}</p>
-                        <p>Email: ${emails[i] || 'N/A'}</p>
-                        <hr>
-                      `;
-                    }
-          
-                    new mapboxgl.Popup()
-                      .setLngLat(point.coordinates)
-                      .setHTML(`
-                        <h3>${properties.ZoneName || 'N/A'}</h3>
-                        ${captainInfo}
-                        <p><strong>Status:</strong> ${properties.Status || 'N/A'}</p>
-                      `)
-                      .addTo(map);
-                } else {
-                    new mapboxgl.Popup()
-                      .setLngLat(point.coordinates)
-					  .setHTML('<p>There is not yet a Neighborhood Captain for this location. Would you like to <a href="interest_form.html" target="_blank">volunteer as a captain</a> for your area?</p>')
-                      .addTo(map);
-                }
-            });
-          
-            // Show properties on polygon click
-            map.on('click', 'polygon-layer', (e) => {
-                const properties = e.features[0].properties;
-                const names = properties.ContactName ? properties.ContactName.split(';') : [];
-                const phones = properties.ContactPhone ? properties.ContactPhone.split(';') : [];
-                const emails = properties.ContactEmail ? properties.ContactEmail.split(';') : [];
-          
-                let captainInfo = "";
-                for (let i = 0; i < names.length; i++) {
+                // Popup for polygon-layer clicks (unchanged)
+                function generateCaptainInfo(properties) {
+                  const names = properties.ContactName ? properties.ContactName.split(';') : [];
+                  const phones = properties.ContactPhone ? properties.ContactPhone.split(';') : [];
+                  const emails = properties.ContactEmail ? properties.ContactEmail.split(';') : [];
+                  let captainInfo = "";
+                  for (let i = 0; i < names.length; i++) {
                     captainInfo += `
-                      <p><strong>Captain ${i + 1}:</strong> ${names[i] || 'N/A'}</p>
-                      <p>Phone: ${phones[i] || 'N/A'}</p>
-                      <p>Email: ${emails[i] || 'N/A'}</p>
-                      <hr>
+                      <div class="captain-block">
+                        <p><span class="prop-label"><strong>Captain ${i + 1}:</strong></span><span class="prop-value">${names[i] || 'N/A'}</span></p>
+                        <p><span class="prop-label">Phone:</span><span class="prop-value">${phones[i] || 'N/A'}</span></p>
+                        <p><span class="prop-label">Email:</span><span class="prop-value">${emails[i] || 'N/A'}</span></p>
+                      </div>
                     `;
+                  }
+                  return captainInfo;
                 }
           
-                new mapboxgl.Popup()
-                  .setLngLat(e.lngLat)
-                  .setHTML(`
-                    <h3>${properties.ZoneName || 'N/A'}</h3>
-                    ${captainInfo}
-                    <p><strong>Status:</strong> ${properties.Status || 'N/A'}</p>
-                  `)
-                  .addTo(map);
+                map.on('click', 'polygon-layer', (e) => {
+                  const properties = e.features[0].properties;
+                  const captainInfo = generateCaptainInfo(properties);
+                  const statusClass = properties.Status === 'Confirmed' ? 'confirmed' : '';
+                  new mapboxgl.Popup()
+                    .setLngLat(e.lngLat)
+                    .setHTML(`
+                      <div class="popup-header">
+                        <h3>${properties.ZoneName || 'N/A'}</h3>
+                        <span class="status ${statusClass}">${properties.Status || 'N/A'}</span>
+                      </div>
+                      ${captainInfo}
+                    `)
+                    .addTo(map);
+                });
+              });
+          
+              // If the style is toggled (e.g. streets ↔ satellite), re‐add any layers whose checkboxes are checked
+              map.on('style.load', () => {
+                addCustomLayers();
+                if (document.getElementById('toggleDINS').checked) {
+                  addDINSLayer();
+                }
+                if (document.getElementById('togglePerimeter').checked) {
+                  addPerimeterLayer();
+                }
+              });
+          
+              // Style‐toggle button logic (if you have a button with id="toggleStyle")
+              const styleToggleButton = document.getElementById('toggleStyle');
+              if (styleToggleButton) {
+                styleToggleButton.addEventListener('click', () => {
+                  currentStyle = (currentStyle === 'streets-v11') ? 'satellite-v9' : 'streets-v11';
+                  map.setStyle(`mapbox://styles/mapbox/${currentStyle}`);
+                });
+              }
+          
+              // ============================
+              // DINS Toggle Event Listener
+              // ============================
+              document.getElementById('toggleDINS').addEventListener('change', (e) => {
+                console.log("DINS checkbox changed:", e.target.checked);
+                const legend = document.getElementById('dinsLegend');
+                if (e.target.checked) {
+                  addDINSLayer();
+                  legend.style.display = 'inline-flex';
+                } else {
+                  removeDINSLayer();
+                  legend.style.display = 'none';
+                }
+              });
+          
+              // =====================================
+              // Perimeter Toggle Event Listener (new)
+              // =====================================
+              document.getElementById('togglePerimeter').addEventListener('change', (e) => {
+                console.log("Perimeter checkbox changed:", e.target.checked);
+                if (e.target.checked) {
+                  addPerimeterLayer();
+                } else {
+                  removePerimeterLayer();
+                }
+              });
+          
             });
-        </script>
-    </div>
+          </script>
+      
+      </div>
+        
+        
+		<p class="map-note">This map exists to help neighbors find each other, connect, and organize in the wake of a disaster that upended our lives. It is a tool for mutual aid, not a marketing list. If you are a business or third-party organization using this map to solicit Neighborhood Captains, please reconsider. It's not just inappropriate — it undermines the spirit of community recovery we’re trying to build. Do better.</p>
     
     <script src="js/main.js"></script>
 	<script>
