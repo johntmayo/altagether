@@ -83,6 +83,41 @@
                 height: 600px;
             }
         }
+        
+        /* Clean up Mapbox attribution - make it smaller and less intrusive */
+        .mapboxgl-ctrl-logo {
+            width: 65px !important;
+            height: 18px !important;
+            margin: 0 0 2px -4px !important;
+            opacity: 0.6;
+        }
+        
+        .mapboxgl-ctrl-attrib {
+            background: rgba(255, 255, 255, 0.3) !important;
+            font-size: 9px !important;
+            padding: 2px 4px !important;
+            border-radius: 2px !important;
+        }
+        
+        .mapboxgl-ctrl-attrib-inner {
+            color: #666 !important;
+            line-height: 1.2 !important;
+        }
+        
+        .mapboxgl-ctrl-attrib-inner a {
+            color: #666 !important;
+            text-decoration: none !important;
+        }
+        
+        .mapboxgl-ctrl-attrib-inner a:hover {
+            color: #333 !important;
+            text-decoration: underline !important;
+        }
+        
+        /* Hide the attribution toggle button to make it cleaner */
+        .mapboxgl-ctrl-attrib-button {
+            display: none !important;
+        }
     </style>
 </head>
 <body>
@@ -176,23 +211,8 @@
               </div>
             </div>
           </div>
-          <div class="mapboxgl-ctrl-bottom-left">
-            <div class="mapboxgl-ctrl" style="display: block;">
-              <a class="mapboxgl-ctrl-logo" target="_blank" rel="noopener nofollow" href="https://www.mapbox.com/" aria-label="Mapbox logo"></a>
-            </div>
-          </div>
-          <div class="mapboxgl-ctrl-bottom-right">
-            <div class="mapboxgl-ctrl mapboxgl-ctrl-attrib">
-              <button class="mapboxgl-ctrl-attrib-button" type="button" aria-label="Toggle attribution">
-                <span class="mapboxgl-ctrl-icon" aria-hidden="true" title="Toggle attribution"></span>
-              </button>
-              <div class="mapboxgl-ctrl-attrib-inner" role="list">
-                <a href="https://www.mapbox.com/about/maps/" target="_blank" title="Mapbox" aria-label="Mapbox">© Mapbox</a>
-                <a href="https://www.openstreetmap.org/about/" target="_blank" title="OpenStreetMap" aria-label="OpenStreetMap">© OpenStreetMap</a>
-                <a class="mapbox-improve-map" href="https://apps.mapbox.com/feedback/?owner=mapbox&amp;id=streets-v11&amp;access_token=pk.eyJ1IjoiYWx0YWdldGhlciIsImEiOiJjbTY0ZWdqMDkweHZ4MnBwdTg3OGVrbmhyIn0.FyctMHs1MC4EUbDY56-AoA#/-118.13761/34.18942/12.5" target="_blank" aria-label="Map feedback" rel="noopener nofollow">Improve this map</a>
-              </div>
-            </div>
-          </div>
+          <div class="mapboxgl-ctrl-bottom-left"></div>
+          <div class="mapboxgl-ctrl-bottom-right"></div>
           
           <!-- =========================
                JavaScript (Mapbox + Toggles)
