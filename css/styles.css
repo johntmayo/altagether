@@ -263,6 +263,122 @@ h2 {
     width: 1200px !important;
 }
 
+#toggleDINSContainer {
+    position: absolute;
+    top: 56px;
+    right: 10px;
+    z-index: 1;
+    font-size: 15px;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px 2px;
+    color: rgba(0, 0, 0, 0.5);
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background: rgb(255, 255, 255);
+    border-width: initial;
+    border-style: none;
+    border-color: initial;
+    border-image: initial;
+    padding: 10px;
+    border-radius: 4px;
+    gap: 6px;
+}
+
+#legendTitle {
+    display: inline-flex;
+    gap: 4px;
+}
+
+#dinsLegend {
+    display: none;
+    align-items: flex-start;
+    font-size: 13px;
+    color: rgba(0, 0, 0, 0.75);
+    flex-direction: column;
+}
+
+.legend-item {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 6px;
+    font-size: 11px;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.legend-circle {
+    width: 8px;
+    height: 8px;
+    display: inline-block;
+    margin-right: 4px;
+    border-radius: 50%;
+}
+
+.mapboxgl-popup-content {
+    background-color: rgb(255, 255, 255);
+    font-size: 12px;
+    line-height: 1.4;
+    box-shadow: rgba(0, 0, 0, 0.08) 0px 2px 12px !important;
+    border-radius: 6px !important;
+    padding: 16px !important;
+}
+
+.mapboxgl-popup-content .popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    padding-bottom: 0px;
+}
+
+.mapboxgl-popup-content .popup-header h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: rgb(51, 51, 51);
+    margin: 0px;
+}
+
+.mapboxgl-popup-content .popup-header .status {
+    font-size: 12px;
+    font-weight: 600;
+    color: rgb(51, 51, 51);
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.mapboxgl-popup-content .popup-header .status.confirmed {
+    background-color: rgb(230, 249, 230);
+}
+
+.mapboxgl-popup-content .captain-block {
+    background-color: rgb(250, 250, 250);
+    margin-bottom: 8px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(238, 238, 238);
+    border-image: initial;
+    border-radius: 4px;
+    padding: 8px;
+}
+
+.mapboxgl-popup-content .captain-block p {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: rgb(51, 51, 51);
+    margin: 0px;
+    padding: 2px 0px;
+}
+
+.mapboxgl-popup-content .captain-block p .prop-label {
+    text-align: left;
+}
+
+.mapboxgl-popup-content .captain-block p .prop-value {
+    text-align: right;
+}
+
+
 /* FAQ Styles */
 .faq-section {
     margin-bottom: 1rem;
