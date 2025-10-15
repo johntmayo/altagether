@@ -30,9 +30,10 @@
         .archive-grid{grid-template-columns:1fr;gap:16px}
         .issues{max-height:none;height:auto}
         .issues ul{padding:0 0 0 8px}
-        .viewer iframe{height:60vh}
-        .viewer-actions{text-align:center}
-        .viewer-actions button{margin:0 4px;font-size:11px;padding:6px 12px}
+        .viewer{display:none}
+        .issues a{text-decoration:underline;color:#BC6C25}
+        .issues a:hover{color:#DDA15E}
+        .issues a.active{background:none;color:#BC6C25;font-weight:bold;text-decoration:underline}
       }
     </style>
 </head>
@@ -67,11 +68,11 @@
                 2) Add ?embedded=true&rm=minimal to the end for better display
                 3) Put that URL in href and target "docFrame".
               -->
-              <li><a href="https://docs.google.com/document/d/1aD9D1fi3auqSF_JFn_Rxqz9tQ6Nb0JLkHNtVkzKOI94/preview?embedded=true&rm=minimal" target="docFrame" class="active">October 9, 2025</a></li>
-              <li><a href="https://docs.google.com/document/d/1ZCfAR_W5QqX3s7l14811xaSifyp9lGCL5L4lyfQCKtQ/preview?embedded=true&rm=minimal" target="docFrame">September 25, 2025</a></li>
-              <li><a href="https://docs.google.com/document/d/1pR78QtmYVzwq84IAncoMUprP7zwhJV1M0r9g97xzUbk/preview?embedded=true&rm=minimal" target="docFrame">September 12, 2025</a></li>
-              <li><a href="https://docs.google.com/document/d/1tWrr4-A5U_9Ml-K748BIHEcCsRuB_52NsrdfyP3HFRA/preview?embedded=true&rm=minimal" target="docFrame">August 28, 2025</a></li>
-              <li><a href="https://docs.google.com/document/d/1Z4Ep-kyOdF9cYwyElgG0yVDHoFXsAqdM03qNVtofRaw/preview?embedded=true&rm=minimal" target="docFrame">August 14, 2025</a></li>
+              <li><a href="https://docs.google.com/document/d/1aD9D1fi3auqSF_JFn_Rxqz9tQ6Nb0JLkHNtVkzKOI94/edit" target="_blank" class="active">October 9, 2025</a></li>
+              <li><a href="https://docs.google.com/document/d/1ZCfAR_W5QqX3s7l14811xaSifyp9lGCL5L4lyfQCKtQ/edit" target="_blank">September 25, 2025</a></li>
+              <li><a href="https://docs.google.com/document/d/1pR78QtmYVzwq84IAncoMUprP7zwhJV1M0r9g97xzUbk/edit" target="_blank">September 12, 2025</a></li>
+              <li><a href="https://docs.google.com/document/d/1tWrr4-A5U_9Ml-K748BIHEcCsRuB_52NsrdfyP3HFRA/edit" target="_blank">August 28, 2025</a></li>
+              <li><a href="https://docs.google.com/document/d/1Z4Ep-kyOdF9cYwyElgG0yVDHoFXsAqdM03qNVtofRaw/edit" target="_blank">August 14, 2025</a></li>
             </ul>
           </aside>
 
@@ -84,8 +85,7 @@
             </div>
             <!-- Default to your most recent issue -->
             <iframe name="docFrame"
-                    src="https://docs.google.com/document/d/1aD9D1fi3auqSF_JFn_Rxqz9tQ6Nb0JLkHNtVkzKOI94/preview?embedded=true&rm=minimal"
-                    sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox">
+                    src="https://docs.google.com/document/d/1aD9D1fi3auqSF_JFn_Rxqz9tQ6Nb0JLkHNtVkzKOI94/preview?embedded=true&rm=minimal">
             </iframe>
           </main>
         </section>
@@ -111,10 +111,16 @@
       // Track the current document URL
       let currentDocUrl = '';
 
-      // Handle clicks to update the preview iframe
+      // Handle clicks to update the preview iframe (desktop only)
       document.addEventListener('click', function(e) {
         // Check if the click is on a newsletter link
-        if (e.target.tagName === 'A' && e.target.target === 'docFrame') {
+        if (e.target.tagName === 'A' && e.target.target === '_blank') {
+          // On mobile, let the link open normally in new tab
+          if (window.innerWidth <= 768) {
+            return; // Let the browser handle it normally
+          }
+          
+          // On desktop, prevent default and update iframe
           e.preventDefault();
           
           // Remove active class from all links
@@ -129,7 +135,7 @@
           let url = e.target.href;
           
           // Store the original URL for the "Open Full Doc" button
-          currentDocUrl = e.target.href.replace('?embedded=true&rm=minimal', '');
+          currentDocUrl = e.target.href;
           
           // Convert Google Drive URLs to preview format
           if (url.includes('docs.google.com/document')) {
