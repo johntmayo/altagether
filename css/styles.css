@@ -434,6 +434,27 @@ h2 {
     transition: color 0.3s ease;
 }
 
+/* Donate Section Styling */
+.donate-section {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 5%;
+    text-align: center;
+}
+
+.paypal-container {
+    margin: 20px 0;
+}
+
+.donation-note {
+    font-size: 0.9rem;
+    color: #666;
+    font-style: italic;
+    margin-top: 15px;
+}
+
 /* FAQ Alignment Fix */
 .faq-section {
     margin-bottom: 1rem;
