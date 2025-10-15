@@ -21,6 +21,7 @@
       .issues a.active:hover{background-color:#DDA15E;text-decoration:none}
       .viewer{background:#ffffffdd;backdrop-filter:blur(6px);border-radius:12px;padding:8px}
       .viewer iframe{width:100%;height:80vh;border:0}
+      .viewer{position:relative}
       /* optional small divider spacing */
       .divider{margin-top:20px}
       
@@ -83,7 +84,8 @@
             </div>
             <!-- Default to your most recent issue -->
             <iframe name="docFrame"
-                    src="https://docs.google.com/document/d/1aD9D1fi3auqSF_JFn_Rxqz9tQ6Nb0JLkHNtVkzKOI94/preview?embedded=true&rm=minimal">
+                    src="https://docs.google.com/document/d/1aD9D1fi3auqSF_JFn_Rxqz9tQ6Nb0JLkHNtVkzKOI94/preview?embedded=true&rm=minimal"
+                    sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox">
             </iframe>
           </main>
         </section>
@@ -149,6 +151,7 @@
         
         const printBtn = document.getElementById('printBtn');
         const openDocBtn = document.getElementById('openDocBtn');
+        
         
         printBtn.addEventListener('click', function() {
           // For Google Docs, we need to open the print-friendly version
