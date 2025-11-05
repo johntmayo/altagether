@@ -480,15 +480,25 @@ h2 {
 }
 
 /* Video Responsive Styling */
-.about iframe {
+.about iframe:not(.airtable-embed) {
     max-width: 100%;
     height: 315px; /* Fixed height for desktop */
 }
 
+/* Airtable embed - allow it to use its specified height from inline attribute */
+.about iframe.airtable-embed {
+    max-width: 100%;
+    /* Height is controlled by the inline height attribute in the HTML */
+}
+
 @media (max-width: 768px) {
-    .about iframe {
+    .about iframe:not(.airtable-embed) {
         width: 100%;
         height: 200px;
+    }
+    
+    .about iframe.airtable-embed {
+        /* Height is controlled by the inline height attribute in the HTML */
     }
 
     #map {
