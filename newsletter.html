@@ -164,8 +164,18 @@
         printBtn.addEventListener('click', function() {
           // For Google Docs, we need to open the print-friendly version
           if (currentDocUrl) {
-            const printUrl = currentDocUrl.replace('/preview', '/export?format=pdf');
-            window.open(printUrl, '_blank');
+            // Extract document ID from URL (handles /edit, /preview, /view, etc.)
+            const docIdMatch = currentDocUrl.match(/\/d\/([a-zA-Z0-9-_]+)/);
+            if (docIdMatch && docIdMatch[1]) {
+              const docId = docIdMatch[1];
+              // Construct PDF export URL
+              const printUrl = `https://docs.google.com/document/d/${docId}/export?format=pdf`;
+              window.open(printUrl, '_blank');
+            } else {
+              // Fallback to old method if pattern doesn't match
+              const printUrl = currentDocUrl.replace(/\/preview|\/edit|\/view/, '/export?format=pdf');
+              window.open(printUrl, '_blank');
+            }
           }
         });
         
