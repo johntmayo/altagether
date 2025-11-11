@@ -465,6 +465,109 @@ h2 {
     margin-top: 15px;
 }
 
+/* Working Groups */
+.group-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+    padding: 0 5% 40px;
+}
+
+.group-card {
+    background: rgba(255, 255, 255, 0.92);
+    border-radius: 12px;
+    border: 1px solid rgba(188, 108, 37, 0.2);
+    padding: 20px;
+    text-align: left;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    display: flex;
+    gap: 16px;
+}
+
+.group-icon {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #BC6C25;
+    color: #fff;
+    font-family: 'Alegreya', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+}
+
+.group-icon.has-image {
+    background: #fff;
+    border: 1px solid rgba(188, 108, 37, 0.3);
+    padding: 6px;
+}
+
+.group-icon.has-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 50%;
+}
+
+.group-content h4 {
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+.group-content p {
+    margin-top: 0;
+    margin-bottom: 16px;
+}
+
+.group-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.group-link {
+    display: inline-block;
+    padding: 8px 14px;
+    border-radius: 6px;
+    border: 1px solid #BC6C25;
+    color: #BC6C25;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.group-link:hover {
+    background-color: #BC6C25;
+    color: #fff;
+}
+
+.group-link.primary {
+    background-color: #BC6C25;
+    color: #fff;
+}
+
+.group-link.primary:hover {
+    background-color: #DDA15E;
+    border-color: #DDA15E;
+}
+
+@media (max-width: 600px) {
+    .group-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .group-icon {
+        width: 48px;
+        height: 48px;
+        font-size: 1.2rem;
+    }
+}
+
 /* FAQ Alignment Fix */
 .faq-section {
     margin-bottom: 1rem;
