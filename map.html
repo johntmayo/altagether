@@ -59,27 +59,12 @@
             <span class="legend-circle" style="background: green;"></span>No Damage
           </span>
         </div>
-        <!-- New “Perimeter” toggle (starts OFF) -->
+        <!-- New "Perimeter" toggle (starts OFF) -->
         <div id="perimeterTitle">
           <input type="checkbox" id="togglePerimeter">
           <label for="togglePerimeter">Perimeter</label>
         </div>
       </div>
-<<<<<<< HEAD
-        
-        
-		<p class="map-note">This community resource was created to help neighbors connect and support each other during recovery. The contact information here was shared voluntarily by Neighborhood Captains to serve their communities. Please use this map respectfully and reach out to captains only for neighborhood-related support, mutual aid, or community organizing. Thank you for helping us build a stronger, more connected Altadena.</p>
-    
-    <script src="js/main.js"></script>
-	<script>
-// Load navigation
-fetch('nav.html')
-    .then(response => response.text())
-    .then(data => {
-        document.getElementById('nav-placeholder').innerHTML = data;
-    })
-    .catch(error => console.error('Error loading navigation:', error));
-=======
 
       <!-- Mapbox canvas and control container -->
       <div class="mapboxgl-canary" style="visibility: hidden;"></div>
@@ -144,9 +129,6 @@ fetch('nav.html')
         </div>
       </div>
 
-
-
-
 <!-- JavaScript for Mapbox + Toggles -->
 
 <script>
@@ -156,7 +138,7 @@ fetch('nav.html')
     mapboxgl.accessToken = 'pk.eyJ1IjoiYWx0YWdldGhlciIsImEiOiJjbTY0ZWdqMDkweHZ4MnBwdTg3OGVrbmhyIn0.FyctMHs1MC4EUbDY56-AoA';
     let currentStyle = 'streets-v11';
 
-    // Initialize the map — lock rotation/tilt here
+    // Initialize the map – lock rotation/tilt here
     const map = new mapboxgl.Map({
       container: 'map',
       style: `mapbox://styles/mapbox/${currentStyle}`,
@@ -429,7 +411,7 @@ fetch('nav.html')
       });
     });
 
-    // If the style is toggled (e.g. streets ↔ satellite), re‐add any layers whose checkboxes are checked
+    // If the style is toggled (e.g. streets ↔ satellite), re-add any layers whose checkboxes are checked
     map.on('style.load', () => {
       addCustomLayers();
       if (document.getElementById('toggleDINS').checked) {
@@ -440,7 +422,7 @@ fetch('nav.html')
       }
     });
 
-    // Style‐toggle button logic (if you have a button with id="toggleStyle")
+    // Style-toggle button logic (if you have a button with id="toggleStyle")
     const styleToggleButton = document.getElementById('toggleStyle');
     if (styleToggleButton) {
       styleToggleButton.addEventListener('click', () => {
@@ -473,18 +455,14 @@ fetch('nav.html')
     });
 
   });
->>>>>>> b1cacbf4dce8d40666b7a829a0199c14aed91564
 </script>
-
-
-
 
     </div>
 
     <p class="map-note">This map exists to help neighbors find each other, connect, and organize in the wake of a
       disaster that upended our lives. It is a tool for mutual aid, not a marketing list. If you are a business or
       third-party organization using this map to solicit Neighborhood Captains, please reconsider. It's not just
-      inappropriate — it undermines the spirit of community recovery we’re trying to build. Do better.</p>
+      inappropriate – it undermines the spirit of community recovery we're trying to build. Do better.</p>
 
     <script src="js/main.js"></script>
 
