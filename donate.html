@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate - Altagether</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="assets/images/altagether.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,600;0,700;1,400&family=Nunito:wght@400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background"></div>
+
+    <div class="central-box">
+        <header class="main-header">
+            <h1><a href="index.html">Altagether</a></h1>
+            <h2>Keep Altadena together.</h2>
+            <div id="nav-placeholder"></div>
+        </header>
+
+        <div class="about">
+            <h3>Support Our Mission</h3>
+            <p>Your donation helps us keep Altadena connected and thriving. We're working to build stronger neighborhoods, support local initiatives, and create lasting community bonds throughout our beautiful town.</p>
+            
+            <p><strong>Every contribution makes a difference</strong> - whether it's funding neighborhood events, supporting local projects, or helping us maintain our community resources.</p>
+            
+            <div class="donate-section">
+                <h4>Make a Donation</h4>
+                <p>Click the button below to donate securely through PayPal:</p>
+                
+                <div class="paypal-container">
+                    <form action="https://www.paypal.com/donate" method="post" target="_top">
+                        <input type="hidden" name="hosted_button_id" value="Q8GBUUN89ENMY" />
+                        <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+                        <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
+                    </form>
+                </div>
+                
+                <p class="donation-note">Your donation is processed securely through PayPal. You don't need a PayPal account to donate - you can use any credit or debit card.</p>
+            </div>
+            
+            <h4>Other Ways to Help</h4>
+            <p>Can't donate right now? There are other ways to support Altagether:</p>
+            <ul>
+                <li><strong>Become a Neighborhood Captain</strong> - <a href="interest_form.html">Sign up here</a> to help connect your neighbors</li>
+                <li><strong>Share our mission</strong> - Help spread the word about Altagether</li>
+                <li><strong>Volunteer</strong> - Contact us to learn about upcoming community events</li>
+            </ul>
+        </div>
+
+        <div class="divider">
+            <img src="assets/images/mountain.svg" alt="Mountain Icon" class="icon">
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>
+    // Load navigation
+    fetch('nav.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('nav-placeholder').innerHTML = data;
+        })
+        .catch(error => console.error('Error loading navigation:', error));
+    </script>
+</body>
+</html>

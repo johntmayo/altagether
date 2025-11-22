@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Altagether Newsletter</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="assets/images/altagether.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,600;0,700;1,400&family=Nunito:wght@400&display=swap" rel="stylesheet">
+
+    <!-- minimal page-local styles to form the 2-col layout -->
+    <style>
+      .archive-grid{display:grid;grid-template-columns:280px 1fr;gap:24px;margin-top:16px}
+      .issues{background:#ffffffdd;backdrop-filter:blur(6px);border-radius:12px;padding:1px;max-height:80vh;overflow:auto}
+      .issues h4{margin:0 0 8px 0;font-family:"Alegreya", serif}
+      .issues ul{list-style:none;margin:0;padding:0 0 0 12px;text-align:left}
+      .issues li+li{margin-top:8px}
+      .issues a{text-decoration:none;color:inherit;display:block;text-align:left;padding:4px 8px;border-radius:4px;transition:background-color 0.2s}
+      .issues a:hover{text-decoration:underline;background-color:#f0f0f0}
+      .issues a.active{background-color:#BC6C25;color:white;font-weight:bold}
+      .issues a.active:hover{background-color:#DDA15E;text-decoration:none}
+      .viewer{background:#ffffffdd;backdrop-filter:blur(6px);border-radius:12px;padding:8px}
+      .viewer iframe{width:100%;height:80vh;border:0}
+      .viewer{position:relative}
+      /* optional small divider spacing */
+      .divider{margin-top:20px}
+      
+      /* Mobile responsive styles */
+      @media (max-width: 768px) {
+        .archive-grid{grid-template-columns:1fr;gap:16px}
+        .issues{max-height:none;height:auto}
+        .issues ul{padding:0 0 0 8px}
+        .viewer{display:none}
+        .issues a{text-decoration:underline;color:#BC6C25}
+        .issues a:hover{color:#DDA15E}
+        .issues a.active{background:none;color:#BC6C25;font-weight:bold;text-decoration:underline}
+      }
+    </style>
+</head>
+<body>
+
+    <div class="background"></div>
+
+    <div class="central-box mapbox">
+        <header class="main-header">
+            <h1><a href="index.html">Altagether</a></h1>
+            <h2>Keep Altadena together.</h2>
+            <div id="nav-placeholder"></div>
+        </header>
+
+        <div class="about">
+            <h3>The Neighborhood Captain Newsletter</h3>
+            <p>Created by our Neighborhood Captains, this newsletter helps keep Altadena connected and informed. Each issue shares updates on recovery, local events, resources, and key dates — a snapshot of what’s happening around town.</p>
+			<p>Published every two weeks, it doesn’t cover everything, but we try to highlight what matters most. You’ll also find links to other great ways to stay informed.</p>
+            <p>Questions or suggestions? Email us at <a href="mailto:newsletter@altagether.org">newsletter@altagether.org</a>.</p>
+        </div>
+
+        <!-- Two-column archive -->
+        <section class="archive-grid">
+          <!-- LEFT: issues list (manual) -->
+          <aside class="issues">
+            <h4>Issues</h4>
+            <ul>
+              <!--
+                HOW TO ADD:
+                1) Open your Google Doc, copy its URL, and change /edit to /preview
+                   e.g. https://docs.google.com/document/d/DOC_ID/preview
+                2) Add ?embedded=true&rm=minimal to the end for better display
+                3) Put that URL in href and target "docFrame".
+              -->
+              <li><a href="https://docs.google.com/document/d/1wkh_jK98TT5Mf1CNUIN2v9y66K_mFKMD361f5Jwa9q4/edit" target="_blank" class="active">November 20, 2025</a></li>
+              <li><a href="https://docs.google.com/document/d/1GcP32ZHQn9ejcqSnKQOSyal_ZPO1wRgBi8J0fD_hGZs/edit" target="_blank">November 6, 2025</a></li>
+              <li><a href="https://docs.google.com/document/d/17lOzpAVSWjVQtVQKYQabEGcOXBoqqxzoGJDuZCtZ9mE/edit" target="_blank">October 24, 2025</a></li>
+              <li><a href="https://docs.google.com/document/d/1aD9D1fi3auqSF_JFn_Rxqz9tQ6Nb0JLkHNtVkzKOI94/edit" target="_blank">October 9, 2025</a></li>
+              <li><a href="https://docs.google.com/document/d/1ZCfAR_W5QqX3s7l14811xaSifyp9lGCL5L4lyfQCKtQ/edit" target="_blank">September 25, 2025</a></li>
+              <li><a href="https://docs.google.com/document/d/1pR78QtmYVzwq84IAncoMUprP7zwhJV1M0r9g97xzUbk/edit" target="_blank">September 12, 2025</a></li>
+              <li><a href="https://docs.google.com/document/d/1tWrr4-A5U_9Ml-K748BIHEcCsRuB_52NsrdfyP3HFRA/edit" target="_blank">August 28, 2025</a></li>
+              <li><a href="https://docs.google.com/document/d/1Z4Ep-kyOdF9cYwyElgG0yVDHoFXsAqdM03qNVtofRaw/edit" target="_blank">August 14, 2025</a></li>
+            </ul>
+          </aside>
+
+          <!-- RIGHT: live preview -->
+          <main class="viewer">
+            <!-- Action buttons -->
+            <div class="viewer-actions" style="margin-bottom:8px;text-align:right">
+              <button id="printBtn" style="margin-right:8px;padding:4px 8px;background:#BC6C25;color:white;border:none;border-radius:4px;cursor:pointer;font-size:12px">Download PDF</button>
+              <button id="openDocBtn" style="padding:4px 8px;background:#BC6C25;color:white;border:none;border-radius:4px;cursor:pointer;font-size:12px">Open Full Doc</button>
+            </div>
+            <!-- Default to your most recent issue -->
+            <iframe name="docFrame"
+                    src="https://docs.google.com/document/d/1wkh_jK98TT5Mf1CNUIN2v9y66K_mFKMD361f5Jwa9q4/preview?embedded=true&rm=minimal">
+            </iframe>
+          </main>
+        </section>
+
+        <div class="divider">
+            <img src="assets/images/tree.svg" alt="Tree Icon" class="icon">
+        </div>
+
+        <div class="contact-info">
+            <p>Email: <a href="mailto:info@altagether.org">info@altagether.org</a></p>
+            <p>Instagram: <a href="https://www.instagram.com/altagether91001/" target="_blank">@altagether91001</a></p>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>
+      // Load navigation
+      fetch('nav.html')
+        .then(r => r.text())
+        .then(html => document.getElementById('nav-placeholder').innerHTML = html)
+        .catch(err => console.error('Error loading navigation:', err));
+
+      // Track the current document URL
+      let currentDocUrl = '';
+
+      // Handle clicks to update the preview iframe (desktop only)
+      document.addEventListener('click', function(e) {
+        // Check if the click is on a newsletter link
+        if (e.target.tagName === 'A' && e.target.target === '_blank') {
+          // On mobile, let the link open normally in new tab
+          if (window.innerWidth <= 768) {
+            return; // Let the browser handle it normally
+          }
+          
+          // On desktop, prevent default and update iframe
+          e.preventDefault();
+          
+          // Remove active class from all links
+          document.querySelectorAll('.issues a').forEach(link => {
+            link.classList.remove('active');
+          });
+          
+          // Add active class to clicked link
+          e.target.classList.add('active');
+          
+          // Get the URL and convert it to a preview URL
+          let url = e.target.href;
+          
+          // Store the original URL for the "Open Full Doc" button
+          currentDocUrl = e.target.href;
+          
+          // Convert Google Drive URLs to preview format
+          if (url.includes('docs.google.com/document')) {
+            url = url.replace('/edit', '/preview').replace('/view', '/preview') + '?embedded=true&rm=minimal';
+            
+            // Update the right iframe
+            const docFrame = document.querySelector('iframe[name="docFrame"]');
+            if (docFrame) {
+              docFrame.src = url;
+            }
+          }
+        }
+      });
+
+      // Initialize currentDocUrl with the default document
+      document.addEventListener('DOMContentLoaded', function() {
+        // Set the initial currentDocUrl to the default document
+        currentDocUrl = 'https://docs.google.com/document/d/1wkh_jK98TT5Mf1CNUIN2v9y66K_mFKMD361f5Jwa9q4/preview';
+        
+        const printBtn = document.getElementById('printBtn');
+        const openDocBtn = document.getElementById('openDocBtn');
+        
+        
+        printBtn.addEventListener('click', function() {
+          // For Google Docs, we need to open the print-friendly version
+          if (currentDocUrl) {
+            // Extract document ID from URL (handles /edit, /preview, /view, etc.)
+            const docIdMatch = currentDocUrl.match(/\/d\/([a-zA-Z0-9-_]+)/);
+            if (docIdMatch && docIdMatch[1]) {
+              const docId = docIdMatch[1];
+              // Construct PDF export URL
+              const printUrl = `https://docs.google.com/document/d/${docId}/export?format=pdf`;
+              window.open(printUrl, '_blank');
+            } else {
+              // Fallback to old method if pattern doesn't match
+              const printUrl = currentDocUrl.replace(/\/preview|\/edit|\/view/, '/export?format=pdf');
+              window.open(printUrl, '_blank');
+            }
+          }
+        });
+        
+        openDocBtn.addEventListener('click', function() {
+          if (currentDocUrl) {
+            // Handle both published (/pub) and unpublished documents
+            let url = currentDocUrl;
+            
+            // If it's a published document, convert /pub to /edit
+            if (url.includes('/pub')) {
+              url = url.replace('/pub', '/edit');
+            } 
+            // If it's already a preview URL, convert to edit
+            else if (url.includes('/preview')) {
+              url = url.replace('/preview', '/edit');
+            }
+            // If it's already an edit URL, use as-is
+            else if (!url.includes('/edit')) {
+              url = url.replace(/\/[^\/]*$/, '/edit');
+            }
+            
+            window.open(url, '_blank');
+          }
+        });
+      });
+    </script>
+</body>
+</html>
