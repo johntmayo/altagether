@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025 Community Impact Report</title>
+    <link rel="stylesheet" href="css/styles.css">
+	<link rel="icon" href="assets/images/altagether.png" type="image/png">
+	<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,600;0,700;1,400&family=Nunito:wght@400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="background"></div>
+
+    <div class="central-box">
+        <header class="main-header">
+            <h1><a href="index.html">Altagether</a></h1>
+			<h2>Keep Altadena together.</h2>
+			<div id="nav-placeholder"></div>
+
+		</header>
+	
+        <div class="about">
+            <h3>2025 Community Impact Report</h3>
+            <p>Read about Altagether's first year in community organizing.</p>
+<a
+  href="https://drive.google.com/file/d/1v4gybEt_SV7Cfdd3nCicgWIQ1GHemwT5/view?usp=drive_link"
+  target="_blank"
+  rel="noopener noreferrer"
+  style="text-decoration:none;"
+>
+  <button
+    style="padding:10px 10px;background:#BC6C25;color:white;border:none;border-radius:4px;cursor:pointer;font-size:12px;"
+  >
+    2025 Community Impact Report
+  </button>
+</a>
+
+
+        </div>
+
+        <div class="divider">
+            <img src="assets/images/tree.svg" alt="Tree Icon" class="icon">
+        </div>
+        
+
+    </div>
+
+    <script src="js/main.js"></script>
+	<script>
+// Load navigation
+fetch('nav.html')
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById('nav-placeholder').innerHTML = data;
+    })
+    .catch(error => console.error('Error loading navigation:', error));
+</script>
+</body>
+</html>
