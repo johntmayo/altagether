@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>One-Year Anniversary Events</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,600;0,700;1,400&family=Nunito:wght@400&display=swap"
+    rel="stylesheet">
+  <link rel="icon" href="assets/images/altagether.png" type="image/png">
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet">
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
+  <script
+    src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js"></script>
+  <link rel="stylesheet"
+    href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css">
+</head>
+
+<body>
+
+  <div class="background"></div>
+
+  <div class="central-box mapbox">
+    
+    <header class="main-header">
+      <h1><a href="index.html">Altagether</a></h1>
+      <h2>Keep Altadena together.</h2>
+      <div id="nav-placeholder"></div>
+    </header>
+
+    <div class="about">
+      <h3>One-Year Anniversary Events - Community Map</h3>
+      <p>This map compiles many of the community events being held to mark the one-year anniversary of the fire.</p>
+    </div>
+
+
+<iframe src="https://www.google.com/maps/d/embed?mid=18DWLVwL6Z09D4lqwhJIu-l5QDYCx6Bg&ehbc=2E312F" width="1000" height="700"></iframe>
+
+
+
+    <script src="js/main.js"></script>
+
+    <script>
+      // Load navigation
+      fetch('nav.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('nav-placeholder').innerHTML = data;
+        })
+        .catch(error => console.error('Error loading navigation:', error));
+    </script>
+</body>
+
+</html>
