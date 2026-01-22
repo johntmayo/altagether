@@ -63,12 +63,19 @@
             <ul>
               <!--
                 HOW TO ADD:
+                For Google Docs:
                 1) Open your Google Doc, copy its URL, and change /edit to /preview
                    e.g. https://docs.google.com/document/d/DOC_ID/preview
                 2) Add ?embedded=true&rm=minimal to the end for better display
                 3) Put that URL in href and target "docFrame".
+                
+                For Mailerlite:
+                1) Copy the preview URL from Mailerlite
+                   e.g. https://preview.mailerlite.io/preview/1887306/emails/177318461949609574
+                2) Put that URL in href and target "docFrame".
               -->
-			  <li><a href="https://docs.google.com/document/d/1UAh2sCVNsMVeZ8NUiweUB5MpCX8YA5Zjjg-25ZG17v4/edit" target="_blank" class="active">January 6, 2026</a></li>
+			  <li><a href="https://preview.mailerlite.io/preview/1887306/emails/177318461949609574" target="_blank" class="active">January 22, 2026</a></li>
+			  <li><a href="https://docs.google.com/document/d/1UAh2sCVNsMVeZ8NUiweUB5MpCX8YA5Zjjg-25ZG17v4/edit" target="_blank">January 6, 2026</a></li>
   			  <li><a href="https://docs.google.com/document/d/12K04_egmwlPtuzorimqlJcWlC8POhFXXTt5XQOTP2CU/edit" target="_blank">January 3, 2026</a></li>
 			  <li><a href="https://docs.google.com/document/d/1De3XH-1FbxuR3BWg-y6m0pTQGgWLuEsgOpNj3lk3XH8/edit" target="_blank">December 18, 2025</a></li>
               <li><a href="https://docs.google.com/document/d/1ri8N4sWOuBvga7rNl-KMO00j-51ijADynnowT7pfQxc/edit" target="_blank">December 4, 2025</a></li>
@@ -92,7 +99,7 @@
             </div>
             <!-- Default to your most recent issue -->
             <iframe name="docFrame"
-                    src="https://docs.google.com/document/d/1UAh2sCVNsMVeZ8NUiweUB5MpCX8YA5Zjjg-25ZG17v4/preview?embedded=true&rm=minimal">
+                    src="https://preview.mailerlite.io/preview/1887306/emails/177318461949609574">
             </iframe>
           </main>
         </section>
@@ -142,17 +149,28 @@
           let url = e.target.href;
           
           // Store the original URL for the "Open Full Doc" button
-          currentDocUrl = e.target.href;
+          // For Google Docs, store the edit URL; for Mailerlite, store the preview URL
+          if (url.includes('docs.google.com/document')) {
+            currentDocUrl = url; // Keep the edit URL for Google Docs
+          } else if (url.includes('preview.mailerlite.io')) {
+            currentDocUrl = url; // Store the preview URL for Mailerlite
+          } else {
+            currentDocUrl = url;
+          }
           
-          // Convert Google Drive URLs to preview format
+          // Convert Google Drive URLs to preview format, or use Mailerlite URLs as-is
           if (url.includes('docs.google.com/document')) {
             url = url.replace('/edit', '/preview').replace('/view', '/preview') + '?embedded=true&rm=minimal';
-            
-            // Update the right iframe
-            const docFrame = document.querySelector('iframe[name="docFrame"]');
-            if (docFrame) {
-              docFrame.src = url;
-            }
+          }
+          // Mailerlite URLs can be used directly
+          else if (url.includes('preview.mailerlite.io')) {
+            // Use as-is, no transformation needed
+          }
+          
+          // Update the right iframe
+          const docFrame = document.querySelector('iframe[name="docFrame"]');
+          if (docFrame) {
+            docFrame.src = url;
           }
         }
       });
@@ -160,49 +178,61 @@
       // Initialize currentDocUrl with the default document
       document.addEventListener('DOMContentLoaded', function() {
         // Set the initial currentDocUrl to the default document
-        currentDocUrl = 'https://docs.google.com/document/d/1UAh2sCVNsMVeZ8NUiweUB5MpCX8YA5Zjjg-25ZG17v4/preview';
+        currentDocUrl = 'https://preview.mailerlite.io/preview/1887306/emails/177318461949609574';
         
         const printBtn = document.getElementById('printBtn');
         const openDocBtn = document.getElementById('openDocBtn');
         
         
         printBtn.addEventListener('click', function() {
-          // For Google Docs, we need to open the print-friendly version
           if (currentDocUrl) {
-            // Extract document ID from URL (handles /edit, /preview, /view, etc.)
-            const docIdMatch = currentDocUrl.match(/\/d\/([a-zA-Z0-9-_]+)/);
-            if (docIdMatch && docIdMatch[1]) {
-              const docId = docIdMatch[1];
-              // Construct PDF export URL
-              const printUrl = `https://docs.google.com/document/d/${docId}/export?format=pdf`;
-              window.open(printUrl, '_blank');
-            } else {
-              // Fallback to old method if pattern doesn't match
-              const printUrl = currentDocUrl.replace(/\/preview|\/edit|\/view/, '/export?format=pdf');
-              window.open(printUrl, '_blank');
+            // For Google Docs, export as PDF
+            if (currentDocUrl.includes('docs.google.com/document')) {
+              // Extract document ID from URL (handles /edit, /preview, /view, etc.)
+              const docIdMatch = currentDocUrl.match(/\/d\/([a-zA-Z0-9-_]+)/);
+              if (docIdMatch && docIdMatch[1]) {
+                const docId = docIdMatch[1];
+                // Construct PDF export URL
+                const printUrl = `https://docs.google.com/document/d/${docId}/export?format=pdf`;
+                window.open(printUrl, '_blank');
+              } else {
+                // Fallback to old method if pattern doesn't match
+                const printUrl = currentDocUrl.replace(/\/preview|\/edit|\/view/, '/export?format=pdf');
+                window.open(printUrl, '_blank');
+              }
+            }
+            // For Mailerlite, open the preview page and let user print from browser
+            else if (currentDocUrl.includes('preview.mailerlite.io')) {
+              window.open(currentDocUrl, '_blank');
             }
           }
         });
         
         openDocBtn.addEventListener('click', function() {
           if (currentDocUrl) {
-            // Handle both published (/pub) and unpublished documents
-            let url = currentDocUrl;
-            
-            // If it's a published document, convert /pub to /edit
-            if (url.includes('/pub')) {
-              url = url.replace('/pub', '/edit');
-            } 
-            // If it's already a preview URL, convert to edit
-            else if (url.includes('/preview')) {
-              url = url.replace('/preview', '/edit');
+            // For Google Docs, convert to edit URL
+            if (currentDocUrl.includes('docs.google.com/document')) {
+              let url = currentDocUrl;
+              
+              // If it's a published document, convert /pub to /edit
+              if (url.includes('/pub')) {
+                url = url.replace('/pub', '/edit');
+              } 
+              // If it's already a preview URL, convert to edit
+              else if (url.includes('/preview')) {
+                url = url.replace('/preview', '/edit');
+              }
+              // If it's already an edit URL, use as-is
+              else if (!url.includes('/edit')) {
+                url = url.replace(/\/[^\/]*$/, '/edit');
+              }
+              
+              window.open(url, '_blank');
             }
-            // If it's already an edit URL, use as-is
-            else if (!url.includes('/edit')) {
-              url = url.replace(/\/[^\/]*$/, '/edit');
+            // For Mailerlite, just open the preview URL
+            else if (currentDocUrl.includes('preview.mailerlite.io')) {
+              window.open(currentDocUrl, '_blank');
             }
-            
-            window.open(url, '_blank');
           }
         });
       });
