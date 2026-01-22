@@ -201,9 +201,15 @@
                 window.open(printUrl, '_blank');
               }
             }
-            // For Mailerlite, open the preview page and let user print from browser
+            // For Mailerlite, open in new window and trigger print dialog
             else if (currentDocUrl.includes('preview.mailerlite.io')) {
-              window.open(currentDocUrl, '_blank');
+              const printWindow = window.open(currentDocUrl, '_blank');
+              // Wait for window to load, then trigger print
+              printWindow.onload = function() {
+                setTimeout(function() {
+                  printWindow.print();
+                }, 500);
+              };
             }
           }
         });
