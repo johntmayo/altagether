@@ -152,8 +152,12 @@
           // For Google Docs, store the edit URL; for Mailerlite, store the preview URL
           if (url.includes('docs.google.com/document')) {
             currentDocUrl = url; // Keep the edit URL for Google Docs
+            // Update button text for Google Docs
+            document.getElementById('printBtn').textContent = 'Download PDF';
           } else if (url.includes('preview.mailerlite.io')) {
             currentDocUrl = url; // Store the preview URL for Mailerlite
+            // Update button text for Mailerlite
+            document.getElementById('printBtn').textContent = 'Open for Printing';
           } else {
             currentDocUrl = url;
           }
@@ -183,6 +187,11 @@
         const printBtn = document.getElementById('printBtn');
         const openDocBtn = document.getElementById('openDocBtn');
         
+        // Set initial button text based on default document type
+        if (currentDocUrl.includes('preview.mailerlite.io')) {
+          printBtn.textContent = 'Open for Printing';
+        }
+        
         
         printBtn.addEventListener('click', function() {
           if (currentDocUrl) {
@@ -201,15 +210,9 @@
                 window.open(printUrl, '_blank');
               }
             }
-            // For Mailerlite, open in new window and trigger print dialog
+            // For Mailerlite, open in new tab (user can press Ctrl+P to print/save as PDF)
             else if (currentDocUrl.includes('preview.mailerlite.io')) {
-              const printWindow = window.open(currentDocUrl, '_blank');
-              // Wait for window to load, then trigger print
-              printWindow.onload = function() {
-                setTimeout(function() {
-                  printWindow.print();
-                }, 500);
-              };
+              window.open(currentDocUrl, '_blank');
             }
           }
         });
